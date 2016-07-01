@@ -7,7 +7,7 @@ data:extend(
     energy_required = 2.5,
     ingredients =
     {
-	  {"alien-artifact", 1},
+	  {"alien-bioconstruct", 5},
 	  {"stone", 10},
     },
     result = "hybridized-wall"
@@ -19,7 +19,7 @@ data:extend(
     energy_required = 2.5,
     ingredients =
     {
-	  {"alien-artifact", 1},
+	  {"alien-bioconstruct", 5},
 	  {"stone", 5},
 	  {"iron-gear-wheel", 5},
     },

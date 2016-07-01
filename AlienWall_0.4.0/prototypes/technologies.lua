@@ -1,22 +1,40 @@
 data:extend(
-{ 
+{
+  {
+    type = 'technology',
+    name='alien-bioengineering',
+    icon = '__AlienWall__/graphics/icons/biomass/alien-bioconstruct.png',
+    effects = {{type = 'unlock-recipe', recipe='alien-bioconstruct'}},
+    prerequisites = {},
+    unit =
+	{
+      count = 4,
+      ingredients =
+      {
+        {"science-pack-1", 1},
+        {"science-pack-2", 1}
+      },
+      time = 15
+    },
+    order='a-e-a',
+  },
   {
     type = "technology",
     name="alien-hybridization1",
     icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
     effects = {{type = "unlock-recipe", recipe="hybridized-wall"}},
-    prerequisites = {"stone-walls"},
+    prerequisites = {"stone-walls", 'alien-bioengineering'},
 	unit =
     {
-      count = 1,
+      count = 5,
       ingredients =
       {
-        {"science-pack-1", 3},
-        {"science-pack-2", 2}
+        {"science-pack-1", 2},
+        {"science-pack-2", 1}
       },
       time = 15
     },
-    order="a-e-a",
+    order="a-e-b",
   },
   {
     type = "technology",
@@ -26,7 +44,7 @@ data:extend(
     prerequisites = {"alien-hybridization1", "gates"},
 	unit =
     {
-      count = 1,
+      count = 5,
       ingredients =
       {
         {"science-pack-1", 3},
@@ -34,7 +52,7 @@ data:extend(
       },
       time = 15
     },
-    order="a-e-b",
+    order="a-e-c",
   },
   {
     type = "technology",
@@ -43,7 +61,7 @@ data:extend(
     prerequisites = {"alien-hybridization2"},
 	unit =
     {
-      count = 1,
+      count = 10,
       ingredients =
       {
         {"science-pack-1", 3},
@@ -60,7 +78,7 @@ data:extend(
     prerequisites = {"alien-hybrid-upgrade-1"},
 	unit =
     {
-      count = 1,
+      count = 10,
       ingredients =
       {
         {"science-pack-1", 3},
@@ -79,7 +97,7 @@ data:extend(
     prerequisites = {"alien-hybrid-upgrade-2"},
 	unit =
     {
-      count = 1,
+      count = 10,
       ingredients =
       {
         {"science-pack-1", 3},
@@ -99,7 +117,7 @@ data:extend(
     prerequisites = {"alien-hybrid-upgrade-3"},
 	unit =
     {
-      count = 1,
+      count = 10,
       ingredients =
       {
         {"science-pack-1", 3},
@@ -109,7 +127,7 @@ data:extend(
       },
       time = 35
     },
-    order="a-f-c",
+    order="a-f-d",
 	upgrade = "true",
   }
 })

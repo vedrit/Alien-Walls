@@ -1,11 +1,10 @@
-require "defines"
-require "util"
-require ("variable")
+require("util")
+require("variable")
 
 script.on_event(defines.events.on_tick, function(event)
-		if (game.tick % 60) == 0 then
-			heal_wall()
-		end
+	  if (game.tick % 60) == 0 then
+	  	  heal_wall()
+ 	  end
 end)
 
 script.on_event(defines.events.on_built_entity, function(event)
@@ -54,16 +53,16 @@ script.on_load(init)
 script.on_event(defines.events.on_research_finished, function(event) 
     local research = event.research.name
     if research == "alien-hybrid-upgrade-1" then
-        global.alienregen = 1.2
+        global.alienregen = global.alienregen + 0.2
     end      
     if research == "alien-hybrid-upgrade-2" then
-        global.alienregen = 1.6
+        global.alienregen = global.alienregen + 0.6
     end
     if research == "alien-hybrid-upgrade-3" then
-        global.alienregen = 2.2
+        global.alienregen = global.alienregen + 1.2
     end
 	if research == "alien-hybrid-upgrade-4" then
-        global.alienregen = 3
+        global.alienregen = global.alienregen + 2
     end
 end   
 )
