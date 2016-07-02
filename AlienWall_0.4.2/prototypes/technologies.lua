@@ -4,6 +4,7 @@ data:extend(
     type = 'technology',
     name='alien-bioengineering',
     icon = '__AlienWall__/graphics/icons/biomass/alien-bioconstruct.png',
+	icon_size = 128,
     effects = {{type = 'unlock-recipe', recipe='alien-bioconstruct'}},
     prerequisites = {},
     unit =
