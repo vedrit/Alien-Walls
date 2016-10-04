@@ -566,13 +566,13 @@ data:extend({
             filename = "__AlienWall__/graphics/entity/gate/wall-patch-north.png",
             width = 22,
             height = 35,
-            shift = {0, -0.62}
+            shift = {0, -0.62 + 1}
           },
           {
             filename = "__AlienWall__/graphics/entity/gate/wall-patch-north-shadow.png",
             width = 46,
             height = 31,
-            shift = {0.3, 0.20},
+            shift = {0.3, 0.20 + 1},
             draw_as_shadow = true
           }
         }
@@ -585,13 +585,13 @@ data:extend({
             filename = "__AlienWall__/graphics/entity/gate/wall-patch-east.png",
             width = 11,
             height = 40,
-            shift = {0.328125, -0.109375}
+            shift = {0.328125 - 1, -0.109375}
           },
           {
             filename = "__AlienWall__/graphics/entity/gate/wall-patch-east-shadow.png",
             width = 38,
             height = 32,
-            shift = {0.8125, 0.46875},
+            shift = {0.8125 - 1, 0.46875},
             draw_as_shadow = true
           }
         }
@@ -623,13 +623,13 @@ data:extend({
             filename = "__AlienWall__/graphics/entity/gate/wall-patch-west.png",
             width = 11,
             height = 40,
-            shift = {-0.328125, -0.109375}
+            shift = {-0.328125 + 1, -0.109375}
           },
           {
             filename = "__AlienWall__/graphics/entity/gate/wall-patch-west-shadow.png",
             width = 46,
             height = 32,
-            shift = {0.1875, 0.46875},
+            shift = {0.1875 + 1, 0.46875},
             draw_as_shadow = true
           }
         }
