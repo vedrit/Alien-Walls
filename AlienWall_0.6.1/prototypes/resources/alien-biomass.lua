@@ -8,12 +8,14 @@ data:extend(
     type = "autoplace-control",
     name = "alien-biomass",
     richness = true,
-    order = "b-e"
+    order = "b-e",
+	category = "resource"
   },
   {
     type = "resource",
     name = "alien-biomass",
     icon = "__AlienWall__/graphics/icons/biomass/alien-artifacts.png",
+	icon_size = 32,
     flags = {"placeable-neutral"},
     order="a-b-a",
     minimum = 10,
@@ -93,6 +95,6 @@ data:extend(
 		variation_count = 8
 		},
     },
-    map_color = {r=0.128, g=0.26, b=0.188}
+    map_color = {r=128, g=26, b=188}
   },
 })

@@ -5,12 +5,55 @@ data:extend({
     type = "wall",
     name = "hybrid-wall",
     icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
+	icon_size = 32,
     flags = {"placeable-neutral", "player-creation"},
     minable = {mining_time = 1, result = "hybridized-wall"},
     max_health = HybridHP,
     repair_speed_modifier = 2,
     corpse = "hybrid-wall-remnants",
 	fast_replaceable_group = "wall",
+	connected_gate_visualization =
+    {
+      filename = "__core__/graphics/arrows/underground-lines.png",
+      priority = "high",
+      width = 64,
+      height = 64,
+      scale = 0.5
+    },
+	wall_diode_green = util.conditional_return(not data.is_demo,
+        {
+          filename = "__base__/graphics/entity/gate/wall-diode-green.png",
+          width = 21,
+          height = 22,
+          shift = {0, -0.78125}
+        }),
+    wall_diode_green_light = util.conditional_return(not data.is_demo,
+        {
+          minimum_darkness = 0.3,
+          color = {g=1},
+          shift = {0, -0.78125},
+          size = 1,
+          intensity = 0.3
+        }),
+    wall_diode_red = util.conditional_return(not data.is_demo,
+    {
+      filename = "__base__/graphics/entity/gate/wall-diode-red.png",
+      width = 21,
+      height = 22,
+      shift = {0, -0.78125}
+    }),
+    wall_diode_red_light = util.conditional_return(not data.is_demo,
+    {
+      minimum_darkness = 0.3,
+      color = {r=1},
+      shift = {0, -0.78125},
+      size = 1,
+      intensity = 0.3
+    }),
+    circuit_wire_max_distance = 7.5,
+	circuit_wire_connection_point = circuit_connector_definitions["gate"].points,
+    circuit_connector_sprites = circuit_connector_definitions["gate"].sprites,
+    default_output_signal = data.is_demo and {type = "virtual", name = "signal-green"} or {type = "virtual", name = "signal-G"},
     resistances =
     {
       {
@@ -301,6 +344,7 @@ data:extend({
     type = "corpse",
     name = "hybrid-wall-remnants",
     icon = "__AlienWall__/graphics/icons/wall/hybrid-wall-remnants.png",
+	icon_size = 32,
     flags = {"placeable-neutral", "player-creation"},
 	order = "sw-r",
     selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
@@ -312,6 +356,7 @@ data:extend({
     type = "gate",
     name = "hybrid-gate",
     icon = "__AlienWall__/graphics/icons/gate/hybrid-gate.png",
+	icon_size = 32,
     flags = {"placeable-neutral","placeable-player", "player-creation"},
     fast_replaceable_group = "wall",
     minable = {hardness = 0.2, mining_time = 0.5, result = "hybridized-gate"},
@@ -635,36 +680,7 @@ data:extend({
         }
       }
     },
-    wall_diode_green =
-    {
-      filename = "__AlienWall__/graphics/entity/gate/wall-diode-green.png",
-      width = 21,
-      height = 22,
-      shift = {0, -0.78125}
-    },
-    wall_diode_green_light =
-    {
-      minimum_darkness = 0.3,
-      color = {g=1},
-      shift = {0, -0.78125},
-      size = 1,
-      intensity = 0.3
-    },
-    wall_diode_red =
-    {
-      filename = "__AlienWall__/graphics/entity/gate/wall-diode-red.png",
-      width = 21,
-      height = 22,
-      shift = {0, -0.78125}
-    },
-    wall_diode_red_light =
-    {
-      minimum_darkness = 0.3,
-      color = {r=1},
-      shift = {0, -0.78125},
-      size = 1,
-      intensity = 0.3
-    },
+    
     open_sound =
     {
       variations = { filename = "__base__/sound/gate1.ogg", volume = 0.5 },
@@ -683,5 +699,7 @@ data:extend({
         remove = true
       }
     }
+	
+  
   }
 })
