@@ -1,18 +1,17 @@
 require ("variable")
 
-data:extend({
-  {
+local hybridWall = {
     type = "wall",
     name = "hybrid-wall",
     icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
-	icon_size = 32,
-    flags = {"placeable-neutral", "player-creation"},
+    icon_size = 32,
+    flags = {"placeable-neutral", "player-creation", "not-repairable"}, -- Keeps bots out of trouble if it's going to auto-heal anyway.
     minable = {mining_time = 1, result = "hybridized-wall"},
-    max_health = HybridHP,
+    max_health = HybridHP[1],
     repair_speed_modifier = 2,
     corpse = "hybrid-wall-remnants",
-	fast_replaceable_group = "wall",
-	connected_gate_visualization =
+    fast_replaceable_group = "wall",
+    connected_gate_visualization =
     {
       filename = "__core__/graphics/arrows/underground-lines.png",
       priority = "high",
@@ -20,7 +19,7 @@ data:extend({
       height = 64,
       scale = 0.5
     },
-	wall_diode_green = util.conditional_return(not data.is_demo,
+    wall_diode_green = util.conditional_return(not data.is_demo,
         {
           filename = "__base__/graphics/entity/gate/wall-diode-green.png",
           width = 21,
@@ -51,7 +50,7 @@ data:extend({
       intensity = 0.3
     }),
     circuit_wire_max_distance = 7.5,
-	circuit_wire_connection_point = circuit_connector_definitions["gate"].points,
+    circuit_wire_connection_point = circuit_connector_definitions["gate"].points,
     circuit_connector_sprites = circuit_connector_definitions["gate"].sprites,
     default_output_signal = data.is_demo and {type = "virtual", name = "signal-green"} or {type = "virtual", name = "signal-G"},
     resistances =
@@ -339,28 +338,30 @@ data:extend({
         }
       }
     }
-  },
-  {
+}
+  
+local hybridCorpse = {
     type = "corpse",
     name = "hybrid-wall-remnants",
     icon = "__AlienWall__/graphics/icons/wall/hybrid-wall-remnants.png",
-	icon_size = 32,
+    icon_size = 32,
     flags = {"placeable-neutral", "player-creation"},
-	order = "sw-r",
+    order = "sw-r",
     selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
     selectable_in_game = false,
     time_before_removed = 60 * 60 * 15, -- 15 minutes
     final_render_layer = "remnants",
-  },
-  {
+}
+  
+local hybridGate = {
     type = "gate",
     name = "hybrid-gate",
     icon = "__AlienWall__/graphics/icons/gate/hybrid-gate.png",
-	icon_size = 32,
-    flags = {"placeable-neutral","placeable-player", "player-creation"},
+    icon_size = 32,
+    flags = {"placeable-neutral","placeable-player", "player-creation", "not-repairable"},
     fast_replaceable_group = "wall",
     minable = {hardness = 0.2, mining_time = 0.5, result = "hybridized-gate"},
-    max_health = HybridHP,
+    max_health = HybridHP[1],
     corpse = "small-remnants",
     collision_box = {{-0.29, -0.29}, {0.29, 0.29}},
     selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
@@ -699,7 +700,6 @@ data:extend({
         remove = true
       }
     }
-	
-  
-  }
-})
+}
+
+data:extend({hybridWall, hybridCorpse, hybridGate})
