@@ -62,7 +62,7 @@ function heal_wall()
          if alienwall.valid then
             local health = alienwall.health
             if health < game.entity_prototypes[alienwall.name].max_health then -- Haven't profiled it, but instinct tells me this might be an expensive lookup to do inside the loop for each wall piece. See about caching the current tier's max HP maybe?
-                alienwall.health = health + global.alienregen
+                alienwall.health = health + HybridRegen
             end
          else
             table.remove(global.alienwall, k)
@@ -75,14 +75,9 @@ function init()
    if global.alienwall == nil then
       global.alienwall = {}
    end
-   if global.alienregen == nil or global.alienregen == 0 then
-      global.alienregen = 2 -- Value works out as HP/s. New default is fairly low, but seems balanced for early game.
-   end
    -- Game complains about modifying `global` table during on_load, might run into problems with updating to new version in existing save.
    -- Look into a proper update method or something. Or just leave this check out entirely, it doesn't seem to be needed. At the very least it'll be set properly upon upgrade research.
-   if global.alienwalltier == nil or global.alienwalltier == 0 then
-      global.alienwalltier = 1
-   end
+
    -- Replacing all walls on startup may or may not be a good idea, but should help keep things consistent
    -- Nope because the `game` global isn't available during init.
    -- update_walls()
@@ -103,24 +98,24 @@ end)
 script.on_event(defines.events.on_research_finished, function(event)
     local research = event.research.name
     if research == "alien-hybrid-upgrade-1" then
-        global.alienregen = 5 -- Regen rates could probably also be a list in variable.lua / mod-settings.json.
+        HybridRegen = 5 -- Regen rates could probably also be a list in variable.lua / mod-settings.json.
         -- Ideally, the regen rates would also be tied to the wall entities and we wouldn't be relying on globals at all. Would make multiplayer forces work properly as well. But that's another project for another time.
-        global.alienwalltier = 2
+        HybridTier = 2
         update_walls()
     end      
     if research == "alien-hybrid-upgrade-2" then
-        global.alienregen = 10
-        global.alienwalltier = 3
+        HybridRegen = 10
+        HybridTier = 3
         update_walls()
     end
     if research == "alien-hybrid-upgrade-3" then
-        global.alienregen = 15
-        global.alienwalltier = 4
+        HybridRegen = 15
+        HybridTier = 4
         update_walls()
     end
     if research == "alien-hybrid-upgrade-4" then
-        global.alienregen = 25
-        global.alienwalltier = 5
+        HybridRegen = 25
+        HybridTier = 5
         update_walls()
     end
 end   
