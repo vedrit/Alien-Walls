@@ -23,9 +23,9 @@ data:extend(
   {
     type = "technology",
     name="alien-hybridization-1",
-	localised_name='Alien Hybridization 1',
-    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
-	icon_size = 32,
+	localised_name='Alien Wall Hybridization',
+    icon = '__AlienWall__/graphics/icons/tech/stone-walls.png',
+	icon_size = 128,
     effects = {{type = "unlock-recipe", recipe="hybridized-wall"}},
     prerequisites = {"stone-walls", 'alien-bioengineering'},
 	unit =
@@ -44,9 +44,9 @@ data:extend(
   {
     type = "technology",
     name="alien-hybridization-2",
-	localised_name='Alien Hybridization 2',
-    icon = "__AlienWall__/graphics/icons/gate/hybrid-gate.png",
-	icon_size = 32,
+	localised_name='Alien Gate Hybridization',
+    icon = '__AlienWall__/graphics/icons/tech/gates.png',
+	icon_size = 128,
     effects = {{type = "unlock-recipe", recipe="hybridized-gate"}},
     prerequisites = {"alien-hybridization-1", "gates"},
 	unit =
@@ -68,8 +68,9 @@ data:extend(
     type = "technology",
     name="alien-hybrid-upgrade-1",
 	localised_name='Alien Hybrid Upgrade 1',
-    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
-	icon_size = 32,
+    icon = '__AlienWall__/graphics/icons/tech/stone-walls-plus.png',
+	icon_size = 128,
+	effects = {},
     prerequisites = {"alien-hybridization-2"},
 	unit =
     {
@@ -87,8 +88,9 @@ data:extend(
     type = "technology",
     name="alien-hybrid-upgrade-2",
 	localised_name='Alien Hybrid Upgrade 2',
-    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
-	icon_size = 32,
+    icon = '__AlienWall__/graphics/icons/tech/stone-walls-plus.png',
+	icon_size = 128,
+	effects = {},
     prerequisites = {"alien-hybrid-upgrade-1"},
 	unit =
     {
@@ -108,8 +110,9 @@ data:extend(
     type = "technology",
     name="alien-hybrid-upgrade-3",
 	localised_name='Alien Hybrid Upgrade 3',
-    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
-	icon_size = 32,
+    icon = '__AlienWall__/graphics/icons/tech/stone-walls-plus.png',
+	icon_size = 128,
+	effects = {},
     prerequisites = {"alien-hybrid-upgrade-2"},
 	unit =
     {
@@ -129,8 +132,9 @@ data:extend(
     type = "technology",
     name="alien-hybrid-upgrade-4",
 	localised_name='Alien Hybrid Upgrade 4',
-    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
-	icon_size = 32,
+    icon = '__AlienWall__/graphics/icons/tech/stone-walls-plus.png',
+	icon_size = 128,
+	effects = {},
     prerequisites = {"alien-hybrid-upgrade-3"},
 	unit =
     {
