@@ -103,8 +103,15 @@ function init()
 end
 
 function load()
-	regenrate = global.alienregenrate
-	walltier = global.alienwalltier
+	if global.alienregenrate == nil or global.alienregenrate == 0 then 
+		regenrate = 2 
+	else regenrate = global.alienregenrate
+	end
+	if global.alienwalltier == nil or global.alienwalltier == 0 then 
+		walltier = 1
+	else walltier = global.alienwalltier
+	end
+	-- Best I can do without being able to modify `global` during `on_load` or a migration script
 end
 
 script.on_init(init)
