@@ -4,7 +4,10 @@ require("variable")
 -- As with many things, I'm tempted to dynamically generate this list. But it works for now.
 wallNames = {"hybrid-wall", "hybrid-wall-tier-2", "hybrid-wall-tier-3", "hybrid-wall-tier-4", "hybrid-wall-tier-5"}
 gateNames = {"hybrid-gate", "hybrid-gate-tier-2", "hybrid-gate-tier-3", "hybrid-gate-tier-4", "hybrid-gate-tier-5"}
-         
+regenrate = nil
+walltier = nil
+
+
 function upgrade_wall_section(wall)
    -- Get the current health percentage. We don't want all the new wall sections to be at max health if the old ones weren't.
    local healthPercent = wall.health / game.entity_prototypes[wall.name].max_health
@@ -34,6 +37,8 @@ function update_walls()
    local newWalls = {}
    -- Replace each wall section (or gate) with one of the newer wall/gate level.
    for _, wall in pairs(global.alienwall) do
+	   game.players[1].print("I'm a wall in the registry array!")
+	   game.players[1].print(tostring(wall))
       -- If it's dead we don't need to upgrade.
       -- No need to remove it either, as the current list will be obsolete soon.
       if wall.valid then
@@ -71,42 +76,43 @@ function heal_wall()
    end
 end
 
-function get_current_tier(force)
-	regenrate = HybridRegen
-	walltier = 1
+function update_current_tier(force)
 	-- Regen rates could probably also be a list in variable.lua / mod-settings.json.
 	-- Ideally, the regen rates would also be tied to the wall entities and we wouldn't be relying on globals at all. Would make multiplayer forces work properly as well. But that's another project for another time.
 	if force.technologies["alien-hybrid-upgrade-1"].researched then
-        regenrate = 5
-        walltier = 2
+        global.alienregenrate = 5
+        global.alienwalltier = 2
 	end
 	if force.technologies["alien-hybrid-upgrade-2"].researched then
-        regenrate = 10
-        walltier = 3
+        global.alienregenrate = 10
+        global.alienwalltier = 3
 	end
 	if force.technologies["alien-hybrid-upgrade-3"].researched then
-        regenrate = 15
-        walltier = 4
+        global.alienregenrate = 15
+        global.alienwalltier = 4
 	end
 	if force.technologies["alien-hybrid-upgrade-4"].researched then
-        regenrate = 25
-        walltier = 5
+        global.alienregenrate = 25
+        global.alienwalltier = 5
 	end
+    regenrate = global.alienregenrate
+    walltier = global.alienwalltier
 end
 
 function init()
-   if global.alienwall == nil then
-      global.alienwall = {}
-   end
-   regenrate = HybridRegen
-   walltier = 1
+   global.alienwall = {}
+   global.alienregenrate = HybridRegen
+   global.alienwalltier = 1
+   regenrate = global.alienregenrate
+   walltier = global.alienwalltier
 end
 
 function load()
-	get_current_tier(game.player.force)
+	regenrate = global.alienregenrate
+	walltier = global.alienwalltier
     -- Replacing all walls on startup may or may not be a good idea, but should help keep things consistent
-    -- The `game` global isn't available during init, but is it for `on_load`?.
-    update_walls()
+    -- The `game` global isn't available during init, or `on_load`.
+    -- update_walls()
 end
 
 script.on_init(init)
@@ -124,7 +130,7 @@ end)
 script.on_event(defines.events.on_research_finished, function(event)
     local research = event.research.name
     if string.find(research, "alien%-hybrid%-upgrade") then
-        get_current_tier(game.player.force)
+        update_current_tier(game.player.force)
 		-- I'm still not sure if it's possible to handle multiple player forces with different tiers, but in theory you'd call the force of the one doing the research here, not `player`.
         update_walls()
     end
