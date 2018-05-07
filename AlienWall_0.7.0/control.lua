@@ -15,17 +15,17 @@ function upgrade_wall_section(wall)
    if string.find(wall.name, "gate") ~= nil then
       -- Create a gate.
       wall.destroy()
-      newWall = game.surfaces[1].create_entity{name = gateNames[global.alienwalltier], position = pos, direction = dir, force = game.forces.player}
+      newWall = game.surfaces[1].create_entity{name = gateNames[walltier], position = pos, direction = dir, force = game.forces.player}
       -- Set the health of the new level gate.
-      newWall.health = game.entity_prototypes[gateNames[global.alienwalltier]].max_health * healthPercent
+      newWall.health = game.entity_prototypes[gateNames[walltier]].max_health * healthPercent
    else
       -- Create a wall section.
       -- Currently hardcodes to use surface[1]. Very rarely do maps use multiple surfaces, but something to keep in mind.
       -- Must destroy existing wall first, otherwise create_entity fails and returns nil.
       wall.destroy()
-      newWall = game.surfaces[1].create_entity{name = wallNames[global.alienwalltier], position = pos, direction = dir, force = game.forces.player}
+      newWall = game.surfaces[1].create_entity{name = wallNames[walltier], position = pos, direction = dir, force = game.forces.player}
       -- Set the health of the new level wall.
-      newWall.health = game.entity_prototypes[wallNames[global.alienwalltier]].max_health * healthPercent
+      newWall.health = game.entity_prototypes[wallNames[walltier]].max_health * healthPercent
    end
    return newWall
 end
@@ -62,7 +62,7 @@ function heal_wall()
          if alienwall.valid then
             local health = alienwall.health
             if health < game.entity_prototypes[alienwall.name].max_health then -- Haven't profiled it, but instinct tells me this might be an expensive lookup to do inside the loop for each wall piece. See about caching the current tier's max HP maybe?
-                alienwall.health = health + HybridRegen
+                alienwall.health = health + regenrate
             end
          else
             table.remove(global.alienwall, k)
@@ -71,20 +71,46 @@ function heal_wall()
    end
 end
 
+function get_current_tier(force)
+	regenrate = HybridRegen
+	walltier = 1
+	-- Regen rates could probably also be a list in variable.lua / mod-settings.json.
+	-- Ideally, the regen rates would also be tied to the wall entities and we wouldn't be relying on globals at all. Would make multiplayer forces work properly as well. But that's another project for another time.
+	if force.technologies["alien-hybrid-upgrade-1"].researched then
+        regenrate = 5
+        walltier = 2
+	end
+	if force.technologies["alien-hybrid-upgrade-2"].researched then
+        regenrate = 10
+        walltier = 3
+	end
+	if force.technologies["alien-hybrid-upgrade-3"].researched then
+        regenrate = 15
+        walltier = 4
+	end
+	if force.technologies["alien-hybrid-upgrade-4"].researched then
+        regenrate = 25
+        walltier = 5
+	end
+end
+
 function init()
    if global.alienwall == nil then
       global.alienwall = {}
    end
-   -- Game complains about modifying `global` table during on_load, might run into problems with updating to new version in existing save.
-   -- Look into a proper update method or something. Or just leave this check out entirely, it doesn't seem to be needed. At the very least it'll be set properly upon upgrade research.
+   regenrate = HybridRegen
+   walltier = 1
+end
 
-   -- Replacing all walls on startup may or may not be a good idea, but should help keep things consistent
-   -- Nope because the `game` global isn't available during init.
-   -- update_walls()
+function load()
+	get_current_tier(game.player.force)
+    -- Replacing all walls on startup may or may not be a good idea, but should help keep things consistent
+    -- The `game` global isn't available during init, but is it for `on_load`?.
+    update_walls()
 end
 
 script.on_init(init)
-script.on_load(init)
+script.on_load(load)
 
 script.on_event(defines.events.on_built_entity, function(event) on_built(event.created_entity) end)
 script.on_event(defines.events.on_robot_built_entity, function(event) on_built(event.created_entity) end)
@@ -97,25 +123,9 @@ end)
 
 script.on_event(defines.events.on_research_finished, function(event)
     local research = event.research.name
-    if research == "alien-hybrid-upgrade-1" then
-        HybridRegen = 5 -- Regen rates could probably also be a list in variable.lua / mod-settings.json.
-        -- Ideally, the regen rates would also be tied to the wall entities and we wouldn't be relying on globals at all. Would make multiplayer forces work properly as well. But that's another project for another time.
-        HybridTier = 2
-        update_walls()
-    end      
-    if research == "alien-hybrid-upgrade-2" then
-        HybridRegen = 10
-        HybridTier = 3
-        update_walls()
-    end
-    if research == "alien-hybrid-upgrade-3" then
-        HybridRegen = 15
-        HybridTier = 4
-        update_walls()
-    end
-    if research == "alien-hybrid-upgrade-4" then
-        HybridRegen = 25
-        HybridTier = 5
+    if string.find(research, "alien%-hybrid%-upgrade") then
+        get_current_tier(game.player.force)
+		-- I'm still not sure if it's possible to handle multiple player forces with different tiers, but in theory you'd call the force of the one doing the research here, not `player`.
         update_walls()
     end
 end   
