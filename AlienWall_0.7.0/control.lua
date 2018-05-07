@@ -4,10 +4,7 @@ require("variable")
 -- As with many things, I'm tempted to dynamically generate this list. But it works for now.
 wallNames = {"hybrid-wall", "hybrid-wall-tier-2", "hybrid-wall-tier-3", "hybrid-wall-tier-4", "hybrid-wall-tier-5"}
 gateNames = {"hybrid-gate", "hybrid-gate-tier-2", "hybrid-gate-tier-3", "hybrid-gate-tier-4", "hybrid-gate-tier-5"}
-regenrate = nil
-walltier = nil
-
-
+         
 function upgrade_wall_section(wall)
    -- Get the current health percentage. We don't want all the new wall sections to be at max health if the old ones weren't.
    local healthPercent = wall.health / game.entity_prototypes[wall.name].max_health
@@ -37,8 +34,6 @@ function update_walls()
    local newWalls = {}
    -- Replace each wall section (or gate) with one of the newer wall/gate level.
    for _, wall in pairs(global.alienwall) do
-	   game.players[1].print("I'm a wall in the registry array!")
-	   game.players[1].print(tostring(wall))
       -- If it's dead we don't need to upgrade.
       -- No need to remove it either, as the current list will be obsolete soon.
       if wall.valid then
@@ -61,7 +56,7 @@ function on_built(entity)
     end
 end
 
-function heal_wall()
+function heal_walls()
    if global.alienwall ~= nil then
       for k,alienwall in pairs(global.alienwall) do
          if alienwall.valid then
@@ -110,9 +105,6 @@ end
 function load()
 	regenrate = global.alienregenrate
 	walltier = global.alienwalltier
-    -- Replacing all walls on startup may or may not be a good idea, but should help keep things consistent
-    -- The `game` global isn't available during init, or `on_load`.
-    -- update_walls()
 end
 
 script.on_init(init)
@@ -121,11 +113,7 @@ script.on_load(load)
 script.on_event(defines.events.on_built_entity, function(event) on_built(event.created_entity) end)
 script.on_event(defines.events.on_robot_built_entity, function(event) on_built(event.created_entity) end)
 
-script.on_event(defines.events.on_tick, function(event)
-      if (game.tick % 60) == 0 then
-          heal_wall()
-      end
-end)
+script.on_nth_tick(60, heal_walls)
 
 script.on_event(defines.events.on_research_finished, function(event)
     local research = event.research.name
