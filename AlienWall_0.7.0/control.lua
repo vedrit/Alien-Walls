@@ -104,7 +104,7 @@ end
 
 function load()
 	if global.alienregenrate == nil or global.alienregenrate == 0 then 
-		regenrate = 2 
+		regenrate = HybridRegen
 	else regenrate = global.alienregenrate
 	end
 	if global.alienwalltier == nil or global.alienwalltier == 0 then 
