@@ -1,28 +1,20 @@
---require("variable")
---game.reload_script()
-for index,force in pairs(game.forces) do
-  if force.technologies["alien-hybridization-1"].researched then
-    --force.technologies['alien-bioengineering'].researched = true
-	force.recipes['alien-bioconstruct'].enabled = true
-	end
-	if force.technologies["alien-hybrid-upgrade-1"].researched then
-        HybridRegen = 5
-        HybridTier = 2 --Not sure global will be available for migration
-        update_walls() --Not sure this will work either
-    end      
-    if force.technologies["alien-hybrid-upgrade-2"].researched then
-        HybridRegen = 10
-        HybridTier = 3
-        update_walls()
-    end
-    if force.technologies["alien-hybrid-upgrade-3"].researched then
-        HybridRegen = 15
-        HybridTier = 4
-        update_walls()
-    end
-    if force.technologies["alien-hybrid-upgrade-4"].researched then
-        HybridRegen = 25
-        HybridTier = 5
-        update_walls()
-    end
+for _,force in pairs(game.forces) do
+	-- Did you try turning it off and on again? :)
+	-- Pretty sure this doesn't actually do anything, since these trigger before the mod's control.lua runs, so it isn't listening for the events. Was worth a try though.
+  if force.technologies["alien-hybrid-upgrade-1"].researched then
+    force.technologies["alien-hybrid-upgrade-1"].researched = false
+	force.technologies["alien-hybrid-upgrade-1"].researched = true
+  end
+  if force.technologies["alien-hybrid-upgrade-2"].researched then
+    force.technologies["alien-hybrid-upgrade-2"].researched = false
+	force.technologies["alien-hybrid-upgrade-2"].researched = true
+  end
+  if force.technologies["alien-hybrid-upgrade-3"].researched then
+    force.technologies["alien-hybrid-upgrade-3"].researched = false
+	force.technologies["alien-hybrid-upgrade-3"].researched = true
+  end
+  if force.technologies["alien-hybrid-upgrade-4"].researched then
+    force.technologies["alien-hybrid-upgrade-4"].researched = false
+	force.technologies["alien-hybrid-upgrade-4"].researched = true
+  end
 end
