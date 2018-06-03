@@ -22,7 +22,7 @@ for i = 2,5 do -- could probably go real crazy and make it `for HybridHP.length`
 end
 
 for i = 2,5 do
-    local gate = table.deepcopy(data.raw.gate['hybrid-gate'])
+    local gate = table.deepcopy(data.raw.gate['hybridGate'])
     gate.name='hybrid-gate-tier-'..i
     gate.max_health = HybridHP[i]
 --  gate.minable.result = gate.name
