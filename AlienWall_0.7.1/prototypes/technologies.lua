@@ -23,10 +23,9 @@ data:extend(
   {
     type = "technology",
     name="alien-hybridization-1",
-	localised_name='Alien Wall Hybridization',
-	localised_description='Hybrid Wall that regenerates HP. Basic rate is 2 HP per second. Do research for higher regeneration rates.',
-    icon = '__AlienWall__/graphics/icons/tech/stone-walls.png',
-	icon_size = 128,
+	localised_name='Alien Hybridization 1',
+    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
+	icon_size = 32,
     effects = {{type = "unlock-recipe", recipe="hybridized-wall"}},
     prerequisites = {"stone-walls", 'alien-bioengineering'},
 	unit =
@@ -45,10 +44,9 @@ data:extend(
   {
     type = "technology",
     name="alien-hybridization-2",
-	localised_name='Alien Gate Hybridization',
-	localised_description='Hybrid Gate that regenerates HP. Basic rate is 2 HP per second. Do research for higher regeneration rates.',
-    icon = '__AlienWall__/graphics/icons/tech/gates.png',
-	icon_size = 128,
+	localised_name='Alien Hybridization 2',
+    icon = "__AlienWall__/graphics/icons/gate/hybrid-gate.png",
+	icon_size = 32,
     effects = {{type = "unlock-recipe", recipe="hybridized-gate"}},
     prerequisites = {"alien-hybridization-1", "gates"},
 	unit =
@@ -70,10 +68,8 @@ data:extend(
     type = "technology",
     name="alien-hybrid-upgrade-1",
 	localised_name='Alien Hybrid Upgrade 1',
-	localised_description='Upgrade Hybrid Walls to 600 HP and 5 HP/s regeneration.',
-    icon = '__AlienWall__/graphics/icons/tech/stone-walls-plus.png',
-	icon_size = 128,
-	effects = {},
+    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
+	icon_size = 32,
     prerequisites = {"alien-hybridization-2"},
 	unit =
     {
@@ -91,10 +87,8 @@ data:extend(
     type = "technology",
     name="alien-hybrid-upgrade-2",
 	localised_name='Alien Hybrid Upgrade 2',
-	localised_description='Upgrade Hybrid Walls to 750 HP and 10 HP/s regeneration.',
-    icon = '__AlienWall__/graphics/icons/tech/stone-walls-plus.png',
-	icon_size = 128,
-	effects = {},
+    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
+	icon_size = 32,
     prerequisites = {"alien-hybrid-upgrade-1"},
 	unit =
     {
@@ -114,10 +108,8 @@ data:extend(
     type = "technology",
     name="alien-hybrid-upgrade-3",
 	localised_name='Alien Hybrid Upgrade 3',
-	localised_description='Upgrade Hybrid Walls to 1000 HP and 15 HP/s regeneration.',
-    icon = '__AlienWall__/graphics/icons/tech/stone-walls-plus.png',
-	icon_size = 128,
-	effects = {},
+    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
+	icon_size = 32,
     prerequisites = {"alien-hybrid-upgrade-2"},
 	unit =
     {
@@ -137,10 +129,8 @@ data:extend(
     type = "technology",
     name="alien-hybrid-upgrade-4",
 	localised_name='Alien Hybrid Upgrade 4',
-	localised_description='Upgrade Hybrid Walls to 1500 HP and 25 HP/s regeneration.',
-    icon = '__AlienWall__/graphics/icons/tech/stone-walls-plus.png',
-	icon_size = 128,
-	effects = {},
+    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
+	icon_size = 32,
     prerequisites = {"alien-hybrid-upgrade-3"},
 	unit =
     {

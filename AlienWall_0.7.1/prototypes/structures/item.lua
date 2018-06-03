@@ -8,7 +8,7 @@ data:extend(
     flags = {"goes-to-quickbar"},
     subgroup = "structures",
     order = "a[hybrid-wall]",
-    place_result = "hybrid-wall",
+    place_result = "hybridWall",
     stack_size = 50
   },
   {

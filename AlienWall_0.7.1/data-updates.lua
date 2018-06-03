@@ -6,7 +6,7 @@ local gateTiers = {}
 local items = {}
 
 for i = 2,5 do -- could probably go real crazy and make it `for HybridHP.length` or something dynamic.
-    local wall = table.deepcopy(data.raw.wall['hybrid-wall'])
+    local wall = table.deepcopy(data.raw.wall['hybridWall'])
     wall.name='hybrid-wall-tier-'..i
     wall.max_health = HybridHP[i]
 --  wall.minable.result = wall.name -- Nope, want all wall types to drop the base item. It'll place the correct one on build.

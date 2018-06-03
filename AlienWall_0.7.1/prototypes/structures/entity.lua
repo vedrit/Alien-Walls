@@ -2,7 +2,7 @@ require ("variable")
 
 local hybridWall = {
     type = "wall",
-    name = "hybrid-wall",
+    name = "hybridWall",
     icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
     icon_size = 32,
     flags = {"placeable-neutral", "player-creation", "not-repairable"}, -- Keeps bots out of trouble if it's going to auto-heal anyway.
@@ -336,27 +336,6 @@ local hybridWall = {
             draw_as_shadow = true
           }
         }
-      },
-      water_connection_patch =
-      {
-        sheets =
-        {
-          {
-            filename = "__AlienWall__/graphics/entity/wall/alien-wall-patch.png",
-            priority = "extra-high",
-            width = 52,
-            height = 68,
-            shift = util.by_pixel(0, -2),
-          },
-          {
-            filename = "__base__/graphics/entity/stone-wall/wall-patch-shadow.png",
-            priority = "extra-high",
-            draw_as_shadow = true,
-            width = 74,
-            height = 96,
-            shift = util.by_pixel(6, 13),
-          }
-        }
       }
     }
 }
@@ -376,7 +355,7 @@ local hybridCorpse = {
   
 local hybridGate = {
     type = "gate",
-    name = "hybrid-gate",
+    name = "hybridGate",
     icon = "__AlienWall__/graphics/icons/gate/hybrid-gate.png",
     icon_size = 32,
     flags = {"placeable-neutral","placeable-player", "player-creation", "not-repairable"},
