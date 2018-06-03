@@ -7,7 +7,7 @@ data:extend(
 	icon_size = 32,
     flags = {"goes-to-quickbar"},
     subgroup = "structures",
-    order = "a[hybrid-wall]",
+    order = "a[hybridWall]",
     place_result = "hybridWall",
     stack_size = 50
   },
@@ -18,8 +18,8 @@ data:extend(
 	icon_size = 32,
     flags = {"goes-to-quickbar"},
     subgroup = "structures",
-    order = "b[hybrid-gate]",
-    place_result = "hybrid-gate",
+    order = "b[hybridGate]",
+    place_result = "hybridGate",
     stack_size = 50
   },
 }
