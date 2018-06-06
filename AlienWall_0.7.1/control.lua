@@ -124,9 +124,7 @@ script.on_nth_tick(60, heal_walls)
 
 script.on_event(defines.events.on_research_finished, function(event)
     if string.find(event.research.name, "alien%-hybrid%-upgrade") then
-        for _, player in pairs(game.players) do
-            update_current_tier(player.force)
-		end
+        update_current_tier(game.forces["player"])
 		-- I'm still not sure if it's possible to handle multiple player forces with different tiers, but in theory you'd call the force of the one doing the research here, not `player`.
         update_walls()
     end
