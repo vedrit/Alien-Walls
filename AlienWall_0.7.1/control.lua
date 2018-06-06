@@ -2,8 +2,8 @@ require("util")
 require("variable")
 
 -- As with many things, I'm tempted to dynamically generate this list. But it works for now.
-wallNames = {"hybrid-wall", "hybrid-wall-tier-2", "hybrid-wall-tier-3", "hybrid-wall-tier-4", "hybrid-wall-tier-5"}
-gateNames = {"hybrid-gate", "hybrid-gate-tier-2", "hybrid-gate-tier-3", "hybrid-gate-tier-4", "hybrid-gate-tier-5"}
+wallNames = {"hybridWall", "hybridWall-tier-2", "hybridWall-tier-3", "hybridWall-tier-4", "hybridWall-tier-5"}
+gateNames = {"hybridGate", "hybridGate-tier-2", "hybridGate-tier-3", "hybridGate-tier-4", "hybridGate-tier-5"}
          
 function upgrade_wall_section(wall)
    -- Get the current health percentage. We don't want all the new wall sections to be at max health if the old ones weren't.
@@ -48,7 +48,7 @@ end
 
 function on_built(entity)
     -- We have to consider different names now, with the levels. So use string.find to check if it's a wall/gate.
-    if string.find(entity.name, "hybrid%-wall") or string.find(entity.name, "hybrid%-gate") then
+    if string.find(entity.name, "hybridWall") or string.find(entity.name, "hybridGate") then
       -- If we're at level 2 we'll need to upgade.
       local newWall = upgrade_wall_section(entity)
       -- Store it in the global list for later healing and possible levelling.

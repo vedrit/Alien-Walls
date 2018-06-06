@@ -2,7 +2,7 @@ require ("variable")
 
 local hybridWall = {
     type = "wall",
-    name = "hybrid-wall",
+    name = "hybridWall",
     icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
     icon_size = 32,
     flags = {"placeable-neutral", "player-creation", "not-repairable"}, -- Keeps bots out of trouble if it's going to auto-heal anyway.
@@ -376,7 +376,7 @@ local hybridCorpse = {
   
 local hybridGate = {
     type = "gate",
-    name = "hybrid-gate",
+    name = "hybridGate",
     icon = "__AlienWall__/graphics/icons/gate/hybrid-gate.png",
     icon_size = 32,
     flags = {"placeable-neutral","placeable-player", "player-creation", "not-repairable"},
