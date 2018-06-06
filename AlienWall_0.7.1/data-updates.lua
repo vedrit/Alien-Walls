@@ -13,7 +13,7 @@ for i = 2,5 do -- could probably go real crazy and make it `for HybridHP.length`
     wall.order = "z[hybridWall]"..i
     table.insert(wallTiers, wall)
     
-    local item = table.deepcopy(data.raw.item['hybridized-wall'])
+    local item = table.deepcopy(data.raw.item['hybridizedWall'])
     item.name = wall.name
     item.order = "z[hybridWall]"..i
     item.place_result = wall.name
@@ -29,7 +29,7 @@ for i = 2,5 do
     gate.order = "z[hybridGate]"..i
     table.insert(gateTiers, gate)
     
-    local item = table.deepcopy(data.raw.item['hybridized-gate'])
+    local item = table.deepcopy(data.raw.item['hybridizedGate'])
     item.name = gate.name
     item.order = "z[hybridGate]"..i
     item.place_result = gate.name
