@@ -27,7 +27,7 @@ data:extend(
 	localised_description='Hybrid Wall that regenerates HP. Basic rate is 2 HP per second. Do research for higher regeneration rates.',
     icon = '__AlienWall__/graphics/icons/tech/stone-walls.png',
 	icon_size = 128,
-    effects = {{type = "unlock-recipe", recipe="hybridized-wall"}},
+    effects = {{type = "unlock-recipe", recipe="hybridizedWall"}},
     prerequisites = {"stone-walls", 'alien-bioengineering'},
 	unit =
     {
@@ -49,7 +49,7 @@ data:extend(
 	localised_description='Hybrid Gate that regenerates HP. Basic rate is 2 HP per second. Do research for higher regeneration rates.',
     icon = '__AlienWall__/graphics/icons/tech/gates.png',
 	icon_size = 128,
-    effects = {{type = "unlock-recipe", recipe="hybridized-gate"}},
+    effects = {{type = "unlock-recipe", recipe="hybridizedGate"}},
     prerequisites = {"alien-hybridization-1", "gates"},
 	unit =
     {
