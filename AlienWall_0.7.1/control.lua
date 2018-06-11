@@ -12,7 +12,7 @@ function upgrade_wall_section(wall)
    local dir = wall.direction
    local newWall = {}
    -- Is the current thing a gate?
-   if string.find(wall.name, "gate") ~= nil then
+   if string.find(wall.name, "Gate") ~= nil then
       -- Create a gate.
       wall.destroy()
       newWall = game.surfaces[1].create_entity{name = gateNames[walltier], position = pos, direction = dir, force = game.forces.player}
@@ -123,9 +123,8 @@ script.on_event(defines.events.on_robot_built_entity, function(event) on_built(e
 script.on_nth_tick(60, heal_walls)
 
 script.on_event(defines.events.on_research_finished, function(event)
-    local research = event.research.name
-    if string.find(research, "alien%-hybrid%-upgrade") then
-        update_current_tier(game.player.force)
+    if string.find(event.research.name, "alien%-hybrid%-upgrade") then
+        update_current_tier(game.forces["player"])
 		-- I'm still not sure if it's possible to handle multiple player forces with different tiers, but in theory you'd call the force of the one doing the research here, not `player`.
         update_walls()
     end

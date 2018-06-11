@@ -1,0 +1,21 @@
+{
+  "entity":
+  [
+    ["hybrid-wall", "hybridWall"],
+	["hybrid-wall-tier-2", "hybridWall-tier-2"],
+	["hybrid-wall-tier-3", "hybridWall-tier-3"],
+	["hybrid-wall-tier-4", "hybridWall-tier-4"],
+	["hybrid-wall-tier-5", "hybridWall-tier-5"],
+    ["hybrid-gate", "hybridGate"],
+	["hybrid-gate-tier-2", "hybridGate-tier-2"],
+	["hybrid-gate-tier-3", "hybridGate-tier-3"],
+	["hybrid-gate-tier-4", "hybridGate-tier-4"],
+	["hybrid-gate-tier-5", "hybridGate-tier-5"]
+  ],
+  
+  "item":
+  [
+    ["hybridized-wall", "hybridizedWall"],
+    ["hybridized-gate", "hybridizedGate"]
+  ]
+}

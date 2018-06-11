@@ -6,7 +6,7 @@ local hybridWall = {
     icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
     icon_size = 32,
     flags = {"placeable-neutral", "player-creation", "not-repairable"}, -- Keeps bots out of trouble if it's going to auto-heal anyway.
-    minable = {mining_time = 1, result = "hybridized-wall"},
+    minable = {mining_time = 1, result = "hybridizedWall"},
     max_health = HybridHP[1],
     repair_speed_modifier = 2,
     corpse = "hybrid-wall-remnants",
@@ -381,7 +381,7 @@ local hybridGate = {
     icon_size = 32,
     flags = {"placeable-neutral","placeable-player", "player-creation", "not-repairable"},
     fast_replaceable_group = "wall",
-    minable = {hardness = 0.2, mining_time = 0.5, result = "hybridized-gate"},
+    minable = {hardness = 0.2, mining_time = 0.5, result = "hybridizedGate"},
     max_health = HybridHP[1],
     corpse = "small-remnants",
     collision_box = {{-0.29, -0.29}, {0.29, 0.29}},
