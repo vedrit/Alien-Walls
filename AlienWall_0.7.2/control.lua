@@ -110,6 +110,9 @@ function load()
 	if global.alienwalltier == nil or global.alienwalltier == 0 then 
 		walltier = 1
 	else walltier = global.alienwalltier
+	if global.alienTierUpdated == true then
+		update_walls()
+		end
 	end
 	-- Best I can do without being able to modify `global` during `on_load` or a migration script
 end
@@ -125,9 +128,10 @@ script.on_nth_tick(60, heal_walls)
 script.on_event(defines.events.on_research_finished, function(event)
     local research = event.research.name
     if string.find(research, "alien%-hybrid%-upgrade") then
-        update_current_tier(game.player.force)
-		-- I'm still not sure if it's possible to handle multiple player forces with different tiers, but in theory you'd call the force of the one doing the research here, not `player`.
+        for _, player in pairs(game.players) do 
+            update_current_tier(player.force)
+        end    
+      -- I'm still not sure if it's possible to handle multiple player forces with different tiers, but in theory you'd call the force of the one doing the research here, not `player`.
         update_walls()
     end
-end   
-)
+end)
