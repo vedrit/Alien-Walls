@@ -4,7 +4,7 @@ require("variable")
 -- As with many things, I'm tempted to dynamically generate this list. But it works for now.
 wallNames = {"hybridWall", "hybridWall-tier-2", "hybridWall-tier-3", "hybridWall-tier-4", "hybridWall-tier-5"}
 gateNames = {"hybridGate", "hybridGate-tier-2", "hybridGate-tier-3", "hybridGate-tier-4", "hybridGate-tier-5"}
-         
+
 function upgrade_wall_section(wall)
    -- Get the current health percentage. We don't want all the new wall sections to be at max health if the old ones weren't.
    local healthPercent = wall.health / game.entity_prototypes[wall.name].max_health
@@ -29,8 +29,17 @@ function upgrade_wall_section(wall)
    end
    return newWall
 end
-
+local function configChanged(event)
+	game.print("Game state changed. Tier: " .. tostring(global.alienwalltier) .. " regen rate: " .. tostring(global.alienregenrate))
+	for _, player in pairs(game.players) do 
+            update_current_tier(player.force)
+    end
+	update_walls()
+end
+	
 function update_walls()
+game.print("Updating walls.")
+	global.tierUpdated = false
    local newWalls = {}
    -- Replace each wall section (or gate) with one of the newer wall/gate level.
    for _, wall in pairs(global.alienwall) do
@@ -57,6 +66,11 @@ function on_built(entity)
 end
 
 function heal_walls()
+	if global.tierUpdated == true then
+		game.print("Tiers have been updated. Running wall update!")
+		update_walls()
+		global.tierUpdated = false
+	end
    if global.alienwall ~= nil then
       for k,alienwall in pairs(global.alienwall) do
          if alienwall.valid then
@@ -94,7 +108,7 @@ function update_current_tier(force)
     walltier = global.alienwalltier
 end
 
-function init()
+local function init()
    global.alienwall = {}
    global.alienregenrate = HybridRegen
    global.alienwalltier = 1
@@ -102,7 +116,7 @@ function init()
    walltier = global.alienwalltier
 end
 
-function load()
+local function loaded()
 	if global.alienregenrate == nil or global.alienregenrate == 0 then 
 		regenrate = HybridRegen
 	else regenrate = global.alienregenrate
@@ -110,15 +124,14 @@ function load()
 	if global.alienwalltier == nil or global.alienwalltier == 0 then 
 		walltier = 1
 	else walltier = global.alienwalltier
-	if global.alienTierUpdated == true then
-		update_walls()
-		end
 	end
+
 	-- Best I can do without being able to modify `global` during `on_load` or a migration script
 end
 
 script.on_init(init)
-script.on_load(load)
+script.on_load(loaded)
+script.on_configuration_changed(configChanged)
 
 script.on_event(defines.events.on_built_entity, function(event) on_built(event.created_entity) end)
 script.on_event(defines.events.on_robot_built_entity, function(event) on_built(event.created_entity) end)
