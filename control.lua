@@ -12,13 +12,13 @@ function upgrade_wall_section(wall)
    local dir = wall.direction
    local newWall = {}
    -- Is the current thing a gate?
-   if string.find(wall.name, "gate") ~= nil then
+   if string.find(wall.name, "Gate") ~= nil then
       -- Create a gate.
       wall.destroy()
       newWall = game.surfaces[1].create_entity{name = gateNames[walltier], position = pos, direction = dir, force = game.forces.player}
       -- Set the health of the new level gate.
       newWall.health = game.entity_prototypes[gateNames[walltier]].max_health * healthPercent
-   else
+   else if string.find(wall.name, "Wall") ~= nill then
       -- Create a wall section.
       -- Currently hardcodes to use surface[1]. Very rarely do maps use multiple surfaces, but something to keep in mind.
       -- Must destroy existing wall first, otherwise create_entity fails and returns nil.
@@ -26,7 +26,9 @@ function upgrade_wall_section(wall)
       newWall = game.surfaces[1].create_entity{name = wallNames[walltier], position = pos, direction = dir, force = game.forces.player}
       -- Set the health of the new level wall.
       newWall.health = game.entity_prototypes[wallNames[walltier]].max_health * healthPercent
-   end
+   else
+      game.print("Something went wrong with upgrading walls.")
+	end
    return newWall
 end
 local function configChanged(event)
