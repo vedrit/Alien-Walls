@@ -4,7 +4,6 @@ data:extend({
     name = "alien-biomass",
     icon = "__AlienWall__/graphics/icons/biomass/alien-artifacts.png",
 	icon_size = 32,
-    flags = {"goes-to-main-inventory"},
     subgroup = "raw-resource",
     order = "f[alien-biomass]",
     stack_size = 50
@@ -14,7 +13,6 @@ data:extend({
     name = "alien-bioconstruct",
 	--icon = '__AlienWall__/graphics/icons/biomass/alien-bioconstruct.png',
 	--icon_size = 32,
-	flags = {"goes-to-main-inventory"},
     subgroup = "materials",
     order = "a[alien-bioconstruct]-a",
     category = "crafting",
@@ -28,7 +26,6 @@ data:extend({
     name = "alien-bioconstruct",
     icon = "__AlienWall__/graphics/icons/biomass/alien-bioconstruct.png",
 	icon_size = 32,
-    flags = {"goes-to-main-inventory"},
     subgroup = "materials",
     order = "a[exo-skeleton]-a",
     stack_size = 50,

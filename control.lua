@@ -18,7 +18,7 @@ function upgrade_wall_section(wall)
       newWall = game.surfaces[1].create_entity{name = gateNames[walltier], position = pos, direction = dir, force = game.forces.player}
       -- Set the health of the new level gate.
       newWall.health = game.entity_prototypes[gateNames[walltier]].max_health * healthPercent
-   else if string.find(wall.name, "Wall") ~= nill then
+   elseif string.find(wall.name, "Wall") ~= nill then
       -- Create a wall section.
       -- Currently hardcodes to use surface[1]. Very rarely do maps use multiple surfaces, but something to keep in mind.
       -- Must destroy existing wall first, otherwise create_entity fails and returns nil.
