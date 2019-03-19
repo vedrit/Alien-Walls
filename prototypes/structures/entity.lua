@@ -9,6 +9,7 @@ local hybridWall = {
     minable = {mining_time = 1, result = "hybridized-wall"},
     max_health = HybridHP[1],
     repair_speed_modifier = 2,
+	placeable_by = {item="hybridized-wall", count=1},
     corpse = "hybrid-wall-remnants",
     fast_replaceable_group = "wall",
     connected_gate_visualization =
@@ -502,6 +503,7 @@ local hybridGate = {
     fast_replaceable_group = "wall",
     minable = {hardness = 0.2, mining_time = 0.5, result = "hybridized-gate"},
     max_health = HybridHP[1],
+	placeable_by = {item="hybridized-gate", count=1},
     corpse = "small-remnants",
     collision_box = {{-0.29, -0.29}, {0.29, 0.29}},
     selection_box = {{-0.5, -0.5}, {0.5, 0.5}},

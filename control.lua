@@ -32,7 +32,7 @@ function upgrade_wall_section(wall)
    return newWall
 end
 local function configChanged(event)
-	game.print("Game state changed. Tier: " .. tostring(global.alienwalltier) .. " regen rate: " .. tostring(global.alienregenrate))
+	--game.print("Game state changed. Tier: " .. tostring(global.alienwalltier) .. " regen rate: " .. tostring(global.alienregenrate))
 	for _, player in pairs(game.players) do 
             update_current_tier(player.force)
     end
@@ -40,7 +40,7 @@ local function configChanged(event)
 end
 	
 function update_walls()
-game.print("Updating walls.")
+--game.print("Updating walls.")
 	global.tierUpdated = false
    local newWalls = {}
    -- Replace each wall section (or gate) with one of the newer wall/gate level.
@@ -137,6 +137,7 @@ script.on_configuration_changed(configChanged)
 
 script.on_event(defines.events.on_built_entity, function(event) on_built(event.created_entity) end)
 script.on_event(defines.events.on_robot_built_entity, function(event) on_built(event.created_entity) end)
+script.on_event(defines.events.on_player_pipette, function(event) on_pipette(event.player_index, event.item)end)
 
 script.on_nth_tick(60, heal_walls)
 
@@ -150,3 +151,14 @@ script.on_event(defines.events.on_research_finished, function(event)
         update_walls()
     end
 end)
+
+function on_pipette(player, item)
+	--game.print("Pipette returned " ..tostring(player) .. " and " .. tostring(item.name))
+	if string.find(item.name, "hybridWall") then
+		--game.players[player].clean_cursor()
+		game.players[player].pipette_entity(game.entity_prototypes[wallNames[1]])
+	elseif string.find(item.name, "hybridGate") then
+		--game.players[player].clean_cursor()
+		game.players[player].pipette_entity(game.entity_prototypes[gateNames[1]])
+	end
+end

@@ -1,0 +1,61 @@
+---------------------------------------------------------------------------------------------------
+Version: 0.8.3
+Date: 2019-03-19
+
+  Features:
+    - Adjusted research cost and requirements. If this is too cheap, please let me know.
+
+  Bugfix:
+    - Fix not being able to use blueprints or pipette on upgraded walls and gates.
+
+  Misc:
+    - Removed some print commands that were used for debugging.
+---------------------------------------------------------------------------------------------------
+Version: 0.8.2
+Date: 2019-03-13
+
+Bugfix:
+    - Possible fix for Factorio not allowing mod to be updated?
+---------------------------------------------------------------------------------------------------
+Version: 0.8.1
+Date: 2019-02-27
+
+  Features:
+    - Removed biomass from spawning in world. Now will drop as loot from spitters/biters, spawners and worms. Should be compatible with mods that add or modify aliens.
+  Bugfix:
+---------------------------------------------------------------------------------------------------
+Version: 0.8.0
+Date: 2019-02-26
+
+  Features:
+    - Update to Factorio 0.17
+    - Removed unnecessary tech migration scripts, as they are handled by control.lua. Migration will only modify names.
+  Bugfix:
+---------------------------------------------------------------------------------------------------
+Version: 0.7.3
+Date: 2019-02-04
+
+  Bugfix:
+    - Fix for gates being turned into walls
+---------------------------------------------------------------------------------------------------
+Version: 0.7.2
+Date: 2018-06-02
+
+  Features:
+    - Modified migration scripts to attempt to fix migrating from older versions. Walls from previous version will now upgrade during migration (Thanks eduran!)
+---------------------------------------------------------------------------------------------------
+Version: 0.7.1
+Date: 2018-05-07
+
+  Bugfix:
+    - Unified wall and gate names and references, fixing an error when placing them.
+    - Neglected to integrate changes from ThaPear and TheBrain0110 previously.
+---------------------------------------------------------------------------------------------------
+Version: 0.7.0
+Date: 2018-02-27
+
+  Features:
+    - Higher hybridization researches will also give increased wall health, in addition to increased regen rate.
+  Bugfix:
+    - Fixed icons and wall-water patch
+    - Fixed/added item and technology descriptions
