@@ -77,11 +77,12 @@ data:extend(
     prerequisites = {"alien-hybridization-2"},
 	unit =
     {
-      count = 100,
+      count = 200,
       ingredients =
       {
         {"automation-science-pack", 2},
         {"logistic-science-pack", 2},
+		{"military-science-pack", 2},
       },
       time = 20
     },
@@ -98,12 +99,12 @@ data:extend(
     prerequisites = {"alien-hybrid-upgrade-1"},
 	unit =
     {
-      count = 200,
+      count = 400,
       ingredients =
       {
         {"automation-science-pack", 2},
         {"logistic-science-pack", 2},
-		{"military-science-pack", 1},
+		{"military-science-pack", 2},
       },
       time = 30
     },
@@ -121,11 +122,12 @@ data:extend(
     prerequisites = {"alien-hybrid-upgrade-2"},
 	unit =
     {
-      count = 200,
+      count = 400,
       ingredients =
       {
-        {"automation-science-pack", 3},
-        {"logistic-science-pack", 3},
+        {"automation-science-pack", 2},
+        {"logistic-science-pack", 2},
+		{"military-science-pack", 2},
 		{"chemical-science-pack", 2},
 		      },
       time = 60
@@ -144,13 +146,14 @@ data:extend(
     prerequisites = {"alien-hybrid-upgrade-3"},
 	unit =
     {
-      count = 350,
+      count = 400,
       ingredients =
       {
-        {"automation-science-pack", 3},
-        {"logistic-science-pack", 3},
-		{"chemical-science-pack", 2},
+        {"automation-science-pack", 2},
+        {"logistic-science-pack", 2},
 		{"military-science-pack", 2},
+		{"chemical-science-pack", 2},
+		{"production-science-pack", 2},
 		      },
       time = 60
     },
