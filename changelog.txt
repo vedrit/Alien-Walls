@@ -1,4 +1,12 @@
 ---------------------------------------------------------------------------------------------------
+Version: 0.8.4
+Date: 2019-06-15
+
+	Features:
+		- Adjusted cost for research upgrades
+		- Reduced biomass drop rate, especially for spawners, worms, and larger aliens.
+		- Added compatibility for mods that refer to spawners as 'nest'
+---------------------------------------------------------------------------------------------------
 Version: 0.8.3
 Date: 2019-03-19
 
