@@ -32,7 +32,7 @@ function upgrade_wall_section(wall)
    return newWall
 end
 local function configChanged(event)
-	game.print("Game state changed. Tier: " .. tostring(global.alienwalltier) .. " regen rate: " .. tostring(global.alienregenrate))
+	--game.print("Game state changed. Tier: " .. tostring(global.alienwalltier) .. " regen rate: " .. tostring(global.alienregenrate))
 	for _, player in pairs(game.players) do 
             update_current_tier(player.force)
     end
@@ -40,7 +40,7 @@ local function configChanged(event)
 end
 	
 function update_walls()
-game.print("Updating walls.")
+--game.print("Updating walls.")
 	global.tierUpdated = false
    local newWalls = {}
    -- Replace each wall section (or gate) with one of the newer wall/gate level.

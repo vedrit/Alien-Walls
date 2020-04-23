@@ -9,6 +9,7 @@ local hybridWall = {
     minable = {mining_time = 1, result = "hybridized-wall"},
     max_health = HybridHP[1],
     repair_speed_modifier = 2,
+	placeable_by = {item="hybridized-wall", count=1},
     corpse = "hybrid-wall-remnants",
     fast_replaceable_group = "wall",
     connected_gate_visualization =
@@ -502,6 +503,7 @@ local hybridGate = {
     fast_replaceable_group = "wall",
     minable = {hardness = 0.2, mining_time = 0.5, result = "hybridized-gate"},
     max_health = HybridHP[1],
+	placeable_by = {item="hybridized-gate", count=1},
     corpse = "small-remnants",
     collision_box = {{-0.29, -0.29}, {0.29, 0.29}},
     selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
@@ -883,7 +885,22 @@ local hybridGate = {
     
     open_sound =
     {
-      variations = { filename = "__base__/sound/gate1.ogg", volume = 0.5 },
+      variations = 
+	  {
+	    filename = "__base__/sound/gate-open-1.ogg", volume = 0.55
+	  },
+	  {
+        filename = "__base__/sound/gate-open-2.ogg", volume = 0.55
+	  },
+	  {
+	    filename = "__base__/sound/gate-open-3.ogg", volume = 0.55
+	  },
+      {
+        filename = "__base__/sound/gate-open-4.ogg", volume = 0.55
+      },
+      {
+        filename = "__base__/sound/gate-open-5.ogg", volume = 0.55
+      },
       aggregation =
       {
         max_count = 1,
@@ -892,7 +909,22 @@ local hybridGate = {
     },
     close_sound =
     {
-      variations = { filename = "__base__/sound/gate1.ogg", volume = 0.5 },
+      variations = 
+	  {
+	    filename = "__base__/sound/gate-close-1.ogg", volume = 0.55
+	  },
+	  {
+        filename = "__base__/sound/gate-close-2.ogg", volume = 0.55
+	  },
+	  {
+	    filename = "__base__/sound/gate-close-3.ogg", volume = 0.55
+	  },
+      {
+        filename = "__base__/sound/gate-close-4.ogg", volume = 0.55
+      },
+      {
+        filename = "__base__/sound/gate-close-5.ogg", volume = 0.55
+      },
       aggregation =
       {
         max_count = 1,
