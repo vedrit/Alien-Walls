@@ -1,8 +1,13 @@
 {
 	"name":"AlienWall",
 	"author":"Vedrit and Carrotcake94",
+<<<<<<< HEAD
 	"version":"0.9.0",
 	"factorio_version":"0.18",
+=======
+	"version":"0.8.4",
+	"factorio_version":"0.17",
+>>>>>>> 3748ff52d474cd2bd48ebaf48b3b198678bc836b
 	"title":"Alien Walls",
 	"homepage":"http://www.factorioforums.com/forum/viewtopic.php?f=32&t=12840",
 	"description":"Humanity has made many great advances, but still looks to nature for inspiration. Thanks to users ThaPear, ratchetfreak, and Klonan for help on module healing. Thanks to fishycat for updating to 0.15. Thanks to ThaPear and TheBrain0110 for upgradable wall HP",
