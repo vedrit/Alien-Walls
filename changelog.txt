@@ -1,5 +1,4 @@
 ---------------------------------------------------------------------------------------------------
-<<<<<<< HEAD
 Verion: 0.9.4
 Date: 2020-04-22
 
@@ -11,8 +10,6 @@ Date: 2020-04-22
 	Bugfix:
 		-Only the medium worm was specified for loot allocation. Now, the medium, large and behemoth worms have been specified.
 ---------------------------------------------------------------------------------------------------
-=======
->>>>>>> 3748ff52d474cd2bd48ebaf48b3b198678bc836b
 Version: 0.8.4
 Date: 2019-06-15
 
