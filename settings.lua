@@ -16,27 +16,30 @@ data:extend({
 		order = "1"
 	},
 	{
-		type = "int-setting",
+		type = "double-setting",
 		name = "biomass-min-scale",
 		setting_type = "startup",
 		minimum_value = 1,
-		default_value = 2,
+		maximum_value = 4,
+		default_value = 1.5,
 		order = "2"
 	},
 	{
-		type = "int-setting",
+		type = "double-setting",
 		name = "biomass-max-scale",
 		setting_type = "startup",
 		minimum_value = 1,
-		default_value = 2,
+		maximum_value = 4,
+		default_value = 1.5,
 		order = "3"
 	},
 	{
-		type = "int-setting",
+		type = "double-setting",
 		name = "biomass-structure-bonus",
 		setting_type = "startup",
 		minimum_value = 1,
-		default_value = 4,
+		maximum_value = 8,
+		default_value = 2,
 		order = "4"
 	}
 })

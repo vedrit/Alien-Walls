@@ -8,7 +8,7 @@ data:extend(
     ingredients =
     {
 	  {"alien-bioconstruct", 5},
-	  {"stone", 10},
+	  {"stone-wall", 1},
     },
     result = "hybridized-wall"
   },
@@ -20,8 +20,7 @@ data:extend(
     ingredients =
     {
 	  {"alien-bioconstruct", 5},
-	  {"stone", 5},
-	  {"iron-gear-wheel", 5},
+	  {"gate", 1},
     },
     result = "hybridized-gate"
 	}

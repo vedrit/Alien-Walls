@@ -2,7 +2,7 @@ data:extend({
   {
     type = "item",
     name = "alien-biomass",
-    icon = "__AlienWall__/graphics/icons/biomass/alien-artifacts.png",
+    icon = "__AlienWall__/graphics/icons/alien-artifacts.png",
 	icon_size = 32,
     subgroup = "raw-resource",
     order = "f[alien-biomass]",
@@ -11,7 +11,7 @@ data:extend({
   {
     type = "recipe",
     name = "alien-bioconstruct",
-	--icon = '__AlienWall__/graphics/icons/biomass/alien-bioconstruct.png',
+	--icon = '__AlienWall__/graphics/icons/alien-bioconstruct.png',
 	--icon_size = 32,
     subgroup = "materials",
     order = "a[alien-bioconstruct]-a",
@@ -24,7 +24,7 @@ data:extend({
     {
     type = "item",
     name = "alien-bioconstruct",
-    icon = "__AlienWall__/graphics/icons/biomass/alien-bioconstruct.png",
+    icon = "__AlienWall__/graphics/icons/alien-bioconstruct.png",
 	icon_size = 32,
     subgroup = "materials",
     order = "a[exo-skeleton]-a",
@@ -48,7 +48,7 @@ data:extend({
   {
     type = "tool",
     name = "alien-fragments",
-    icon = "__AlienWall__/graphics/icons/biomass/alien-fragments.png",
+    icon = "__AlienWall__/graphics/icons/alien-fragments.png",
     flags = {"goes-to-main-inventory"},
     subgroup = "materials",
     order = "a[exo-skeleton]-a",
@@ -71,7 +71,7 @@ data:extend({
   {
     type = "tool",
     name = "endo-skeleton",
-    icon = "__AlienWall__/graphics/icons/biomass/endo-skeleton.png",
+    icon = "__AlienWall__/graphics/icons/endo-skeleton.png",
     flags = {"goes-to-main-inventory"},
     subgroup = "materials",
     order = "a[exo-skeleton]-b",
@@ -93,7 +93,7 @@ data:extend({
   {
     type = "tool",
     name = "exo-skeleton",
-    icon = "__AlienWall__/graphics/icons/biomass/exo-skeleton.png",
+    icon = "__AlienWall__/graphics/icons/exo-skeleton.png",
     flags = {"goes-to-main-inventory"},
     subgroup = "materials",
     order = "a[exo-skeleton]-c",

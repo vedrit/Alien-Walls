@@ -1,5 +1,72 @@
+Version: 0.9.11
+Date: 2021-05-15
+
+	Bugfix:
+		-Fixed an issue where gates weren't getting checked for healing
+		
+---------------------------------------------------------------------------------------------------	
+Version: 0.9.10
+Date: 2021-05-15
+
+	Features:
+		-Improved healing check to increase feature reliability and performance
+		-Added event filters to help alliviate future performance issues.
+		-Adjusted wall validation to run less frequently and separately from healing check.
+		-Adjusted wall and gate recipes to use stone walls and gates, respectively
+	
+	Bugfix:
+		-Fixed issue with placing higher-tier walls (Forgot to change function name in a couple places)
+		-Added missing tech prerequesite.
+		
+---------------------------------------------------------------------------------------------------	
+Version: 0.9.9
+Date: 2021-05-14
+
+	Bugfix:
+		-Fixed an issue where walls/gates weren't getting upgraded after the previous bugfix.
+			-This also fixed an issue with walls not healing.
+		-Fixed an issue where wall circuit connections were lost when new tier is researched.
+		-Did some code cleanup.
+		
+---------------------------------------------------------------------------------------------------		
+Version: 0.9.8
+Date: 2021-05-14
+
+	Bugfix:
+		-Fixed an issue where sometimes, placing walls/gates wouldn't be built.
+		
+---------------------------------------------------------------------------------------------------		
+Version: 0.9.7
+Date: 2021-05-07
+
+	Features:
+		-Updated wall and gate graphics/icons (Re-colored vanilla images)
+		-Hybrid walls will not connect/merge with vanilla walls. (I had initially set them to connect/merge, but the effect was not consistent)
+		
+---------------------------------------------------------------------------------------------------		
+Version: 0.9.6
+Date: 2021-05-07
+
+	Features:
+		-Updated to Factorio 1.1
+	
+	Bugfix:
+		-Updated tech requirement references to reflect name changes in vanilla.
+		
+---------------------------------------------------------------------------------------------------	
+Version: 0.9.5
+Date: 2020-08-18
+
+	Features:
+		-Added 2 more tiers of wall/gate plus required research
+		-Changed bonus biomass from a flat bonus (base + integer) to an actual scale (base + (scale * tier)). This should allow players to change the drop rate more to their liking.
+		-Adjusted required research unlocks and packs to make a bit more sense. Also adjusted research costs. This should force unlocks to be later in the game. These walls were never meant to be impenetrable.
+		
+	Bugfix:
+		-Fixed a mistake that caused more biomass to drop from small biters/spitters than intended.
+
 ---------------------------------------------------------------------------------------------------
-Verion: 0.9.4
+Version: 0.9.4
 Date: 2020-04-22
 
 	Features:

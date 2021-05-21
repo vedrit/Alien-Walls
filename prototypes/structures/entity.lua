@@ -3,15 +3,18 @@ require ("variable")
 local hybridWall = {
     type = "wall",
     name = "hybridWall",
-    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
-    icon_size = 32,
+    icon = "__AlienWall__/graphics/icons/hybrid-wall.png",
+    icon_size = 64, icon_mipmaps = 4,
     flags = {"placeable-neutral", "player-creation", "not-repairable"}, -- Keeps bots out of trouble if it's going to auto-heal anyway.
+	collision_box = {{-0.29, -0.29}, {0.29, 0.29}},
+    selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
     minable = {mining_time = 1, result = "hybridized-wall"},
+	fast_replaceable_group = "wall",
     max_health = HybridHP[1],
     repair_speed_modifier = 2,
 	placeable_by = {item="hybridized-wall", count=1},
     corpse = "hybrid-wall-remnants",
-    fast_replaceable_group = "wall",
+    mined_sound = { filename = "__base__/sound/deconstruct-bricks.ogg" },
     connected_gate_visualization =
     {
       filename = "__core__/graphics/arrows/underground-lines.png",
@@ -20,120 +23,7 @@ local hybridWall = {
       height = 64,
       scale = 0.5
     },
-    wall_diode_green = util.conditional_return(not data.is_demo,
-    {
-      sheet =
-      {
-        filename = "__base__/graphics/entity/wall/wall-diode-green.png",
-        priority = "extra-high",
-        width = 38,
-        height = 24,
-        --frames = 4, -- this is optional, it will default to 4 for Sprite4Way
-        shift = util.by_pixel(-2, -24),
-        hr_version =
-        {
-          filename = "__base__/graphics/entity/wall/hr-wall-diode-green.png",
-          priority = "extra-high",
-          width = 72,
-          height = 44,
-          --frames = 4,
-          shift = util.by_pixel(-1, -23),
-          scale = 0.5
-        }
-      }
-    }),
-    wall_diode_green_light_top = util.conditional_return(not data.is_demo,
-    {
-      minimum_darkness = 0.3,
-      color = {g=1},
-      shift = util.by_pixel(0, -30),
-      size = 1,
-      intensity = 0.3
-    }),
-    wall_diode_green_light_right = util.conditional_return(not data.is_demo,
-    {
-      minimum_darkness = 0.3,
-      color = {g=1},
-      shift = util.by_pixel(12, -23),
-      size = 1,
-      intensity = 0.3
-    }),
-    wall_diode_green_light_bottom = util.conditional_return(not data.is_demo,
-    {
-      minimum_darkness = 0.3,
-      color = {g=1},
-      shift = util.by_pixel(0, -17),
-      size = 1,
-      intensity = 0.3
-    }),
-    wall_diode_green_light_left = util.conditional_return(not data.is_demo,
-    {
-      minimum_darkness = 0.3,
-      color = {g=1},
-      shift = util.by_pixel(-12, -23),
-      size = 1,
-      intensity = 0.3
-    }),
-
-    wall_diode_red = util.conditional_return(not data.is_demo,
-    {
-      sheet =
-      {
-        filename = "__base__/graphics/entity/wall/wall-diode-red.png",
-        priority = "extra-high",
-        width = 38,
-        height = 24,
-        --frames = 4, -- this is optional, it will default to 4 for Sprite4Way
-        shift = util.by_pixel(-2, -24),
-        hr_version =
-        {
-          filename = "__base__/graphics/entity/wall/hr-wall-diode-red.png",
-          priority = "extra-high",
-          width = 72,
-          height = 44,
-          --frames = 4,
-          shift = util.by_pixel(-1, -23),
-          scale = 0.5
-        }
-      }
-    }),
-    wall_diode_red_light_top = util.conditional_return(not data.is_demo,
-    {
-      minimum_darkness = 0.3,
-      color = {r=1},
-      shift = util.by_pixel(0, -30),
-      size = 1,
-      intensity = 0.3
-    }),
-    wall_diode_red_light_right = util.conditional_return(not data.is_demo,
-    {
-      minimum_darkness = 0.3,
-      color = {r=1},
-      shift = util.by_pixel(12, -23),
-      size = 1,
-      intensity = 0.3
-    }),
-    wall_diode_red_light_bottom = util.conditional_return(not data.is_demo,
-    {
-      minimum_darkness = 0.3,
-      color = {r=1},
-      shift = util.by_pixel(0, -17),
-      size = 1,
-      intensity = 0.3
-    }),
-    wall_diode_red_light_left = util.conditional_return(not data.is_demo,
-    {
-      minimum_darkness = 0.3,
-      color = {r=1},
-      shift = util.by_pixel(-12, -23),
-      size = 1,
-      intensity = 0.3
-    }),
-    circuit_wire_max_distance = 7.5,
-    circuit_wire_connection_point = circuit_connector_definitions["gate"].points,
-    circuit_connector_sprites = circuit_connector_definitions["gate"].sprites,
-    default_output_signal = data.is_demo and {type = "virtual", name = "signal-green"} or {type = "virtual", name = "signal-G"},
-    resistances =
+	resistances =
     {
       {
         type = "physical",
@@ -154,160 +44,266 @@ local hybridWall = {
         type = "fire",
         percent = 75
       },
+	  {
+        type = "acid",
+        percent = 75
+      },
       {
         type = "laser",
         percent = 10
       }
     },
-    collision_box = {{-0.29, -0.29}, {0.29, 0.29}},
-    selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
-    repair_sound = { filename = "__base__/sound/manual-repair-simple.ogg" },
-    mined_sound = { filename = "__base__/sound/deconstruct-bricks.ogg" },
+	visual_merge_group = 10, --Set to semi-random number so it wouldn't merge with any other wall
+    wall_diode_green = 
+    {
+      sheet =
+      {
+        filename = "__base__/graphics/entity/wall/wall-diode-green.png",
+        priority = "extra-high",
+        width = 38,
+        height = 24,
+        --frames = 4, -- this is optional, it will default to 4 for Sprite4Way
+        shift = util.by_pixel(-2, -24),
+        hr_version =
+        {
+          filename = "__base__/graphics/entity/wall/hr-wall-diode-green.png",
+          priority = "extra-high",
+          width = 72,
+          height = 44,
+          --frames = 4,
+          shift = util.by_pixel(-1, -23),
+          scale = 0.5
+        }
+      }
+    },
+    wall_diode_green_light_top = 
+    {
+      minimum_darkness = 0.3,
+      color = {g=1},
+      shift = util.by_pixel(0, -30),
+      size = 1,
+      intensity = 0.3
+    },
+    wall_diode_green_light_right = 
+    {
+      minimum_darkness = 0.3,
+      color = {g=1},
+      shift = util.by_pixel(12, -23),
+      size = 1,
+      intensity = 0.3
+    },
+    wall_diode_green_light_bottom = 
+    {
+      minimum_darkness = 0.3,
+      color = {g=1},
+      shift = util.by_pixel(0, -17),
+      size = 1,
+      intensity = 0.3
+    },
+    wall_diode_green_light_left = 
+    {
+      minimum_darkness = 0.3,
+      color = {g=1},
+      shift = util.by_pixel(-12, -23),
+      size = 1,
+      intensity = 0.3
+    },
+
+    wall_diode_red = 
+    {
+      sheet =
+      {
+        filename = "__base__/graphics/entity/wall/wall-diode-red.png",
+        priority = "extra-high",
+        width = 38,
+        height = 24,
+        --frames = 4, -- this is optional, it will default to 4 for Sprite4Way
+        shift = util.by_pixel(-2, -24),
+        hr_version =
+        {
+          filename = "__base__/graphics/entity/wall/hr-wall-diode-red.png",
+          priority = "extra-high",
+          width = 72,
+          height = 44,
+          --frames = 4,
+          shift = util.by_pixel(-1, -23),
+          scale = 0.5
+        }
+      }
+    },
+    wall_diode_red_light_top = 
+    {
+      minimum_darkness = 0.3,
+      color = {r=1},
+      shift = util.by_pixel(0, -30),
+      size = 1,
+      intensity = 0.3
+    },
+    wall_diode_red_light_right = 
+    {
+      minimum_darkness = 0.3,
+      color = {r=1},
+      shift = util.by_pixel(12, -23),
+      size = 1,
+      intensity = 0.3
+    },
+    wall_diode_red_light_bottom = 
+    {
+      minimum_darkness = 0.3,
+      color = {r=1},
+      shift = util.by_pixel(0, -17),
+      size = 1,
+      intensity = 0.3
+    },
+    wall_diode_red_light_left = 
+    {
+      minimum_darkness = 0.3,
+      color = {r=1},
+      shift = util.by_pixel(-12, -23),
+      size = 1,
+      intensity = 0.3
+    },
+    circuit_wire_connection_point = circuit_connector_definitions["gate"].points,
+    circuit_connector_sprites = circuit_connector_definitions["gate"].sprites,
+    circuit_wire_max_distance = default_circuit_wire_max_distance,
+    default_output_signal = {type = "virtual", name = "signal-G"},
+    
     pictures =
     {
       single =
       {
-        layers = 
+        layers =
         {
           {
             filename = "__AlienWall__/graphics/entity/wall/wall-single.png",
             priority = "extra-high",
-            width = 22,
-            height = 42,
-            shift = {0, -0.15625}
+            width = 32,
+            height = 46,
+            variation_count = 2,
+            line_length = 2,
+            shift = util.by_pixel(0, -6),
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-single.png",
+              priority = "extra-high",
+              width = 64,
+              height = 86,
+              variation_count = 2,
+              line_length = 2,
+              shift = util.by_pixel(0, -5),
+              scale = 0.5
+            }
           },
           {
             filename = "__AlienWall__/graphics/entity/wall/wall-single-shadow.png",
             priority = "extra-high",
-            width = 47,
+            width = 50,
             height = 32,
-            shift = {0.359375, 0.5},
-            draw_as_shadow = true
+            repeat_count = 2,
+            shift = util.by_pixel(10, 16),
+            draw_as_shadow = true,
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-single-shadow.png",
+              priority = "extra-high",
+              width = 98,
+              height = 60,
+              repeat_count = 2,
+              shift = util.by_pixel(10, 17),
+              draw_as_shadow = true,
+              scale = 0.5
+            }
           }
         }
       },
       straight_vertical =
       {
+        layers =
         {
-          layers =
           {
+            filename = "__AlienWall__/graphics/entity/wall/wall-vertical.png",
+            priority = "extra-high",
+            width = 32,
+            height = 68,
+            variation_count = 5,
+            line_length = 5,
+            shift = util.by_pixel(0, 8),
+            hr_version =
             {
-              filename = "__AlienWall__/graphics/entity/wall/wall-straight-vertical-1.png",
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-vertical.png",
               priority = "extra-high",
-              width = 22,
-              height = 42,
-              shift = {0, -0.15625}
-            },
-            {
-              filename = "__AlienWall__/graphics/entity/wall/wall-straight-vertical-shadow.png",
-              priority = "extra-high",
-              width = 47,
-              height = 60,
-              shift = {0.390625, 0.625},
-              draw_as_shadow = true
+              width = 64,
+              height = 134,
+              variation_count = 5,
+              line_length = 5,
+              shift = util.by_pixel(0, 8),
+              scale = 0.5
             }
-          }
-        },
-        {
-          layers =
+          },
           {
+            filename = "__AlienWall__/graphics/entity/wall/wall-vertical-shadow.png",
+            priority = "extra-high",
+            width = 50,
+            height = 58,
+            repeat_count = 5,
+            shift = util.by_pixel(10, 28),
+            draw_as_shadow = true,
+            hr_version =
             {
-              filename = "__AlienWall__/graphics/entity/wall/wall-straight-vertical-2.png",
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-vertical-shadow.png",
               priority = "extra-high",
-              width = 22,
-              height = 42,
-              shift = {0, -0.15625}
-            },
-            {
-              filename = "__AlienWall__/graphics/entity/wall/wall-straight-vertical-shadow.png",
-              priority = "extra-high",
-              width = 47,
-              height = 60,
-              shift = {0.390625, 0.625},
-              draw_as_shadow = true
-            }
-          }
-        },
-        {
-          layers =
-          {
-            {
-              filename = "__AlienWall__/graphics/entity/wall/wall-straight-vertical-3.png",
-              priority = "extra-high",
-              width = 22,
-              height = 42,
-              shift = {0, -0.15625}
-            },
-            {
-              filename = "__AlienWall__/graphics/entity/wall/wall-straight-vertical-shadow.png",
-              priority = "extra-high",
-              width = 47,
-              height = 60,
-              shift = {0.390625, 0.625},
-              draw_as_shadow = true
+              width = 98,
+              height = 110,
+              repeat_count = 5,
+              shift = util.by_pixel(10, 29),
+              draw_as_shadow = true,
+              scale = 0.5
             }
           }
         }
       },
       straight_horizontal =
       {
+        layers =
         {
-          layers =
           {
+            filename = "__AlienWall__/graphics/entity/wall/wall-horizontal.png",
+            priority = "extra-high",
+            width = 32,
+            height = 50,
+            variation_count = 6,
+            line_length = 6,
+            shift = util.by_pixel(0, -4),
+            hr_version =
             {
-              filename = "__AlienWall__/graphics/entity/wall/wall-straight-horizontal-1.png",
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-horizontal.png",
               priority = "extra-high",
-              width = 32,
-              height = 42,
-              shift = {0, -0.15625}
-            },
-            {
-              filename = "__AlienWall__/graphics/entity/wall/wall-straight-horizontal-shadow.png",
-              priority = "extra-high",
-              width = 59,
-              height = 32,
-              shift = {0.421875, 0.5},
-              draw_as_shadow = true
+              width = 64,
+              height = 92,
+              variation_count = 6,
+              line_length = 6,
+              shift = util.by_pixel(0, -2),
+              scale = 0.5
             }
-          }
-        },
-        {
-          layers =
+          },
           {
+            filename = "__AlienWall__/graphics/entity/wall/wall-horizontal-shadow.png",
+            priority = "extra-high",
+            width = 62,
+            height = 36,
+            repeat_count = 6,
+            shift = util.by_pixel(14, 14),
+            draw_as_shadow = true,
+            hr_version =
             {
-              filename = "__AlienWall__/graphics/entity/wall/wall-straight-horizontal-2.png",
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-horizontal-shadow.png",
               priority = "extra-high",
-              width = 32,
-              height = 42,
-              shift = {0, -0.15625}
-            },
-            {
-              filename = "__AlienWall__/graphics/entity/wall/wall-straight-horizontal-shadow.png",
-              priority = "extra-high",
-              width = 59,
-              height = 32,
-              shift = {0.421875, 0.5},
-              draw_as_shadow = true
-            }
-          }
-        },
-        {
-          layers =
-          {
-            {
-              filename = "__AlienWall__/graphics/entity/wall/wall-straight-horizontal-3.png",
-              priority = "extra-high",
-              width = 32,
-              height = 42,
-              shift = {0, -0.15625}
-            },
-            {
-              filename = "__AlienWall__/graphics/entity/wall/wall-straight-horizontal-shadow.png",
-              priority = "extra-high",
-              width = 59,
-              height = 32,
-              shift = {0.421875, 0.5},
-              draw_as_shadow = true
+              width = 124,
+              height = 68,
+              repeat_count = 6,
+              shift = util.by_pixel(14, 15),
+              draw_as_shadow = true,
+              scale = 0.5
             }
           }
         }
@@ -317,19 +313,44 @@ local hybridWall = {
         layers =
         {
           {
-            filename = "__AlienWall__/graphics/entity/wall/wall-corner-right-down.png",
+            filename = "__AlienWall__/graphics/entity/wall/wall-corner-right.png",
             priority = "extra-high",
-            width = 27,
-            height = 42,
-            shift = {0.078125, -0.15625}
+            width = 32,
+            height = 64,
+            variation_count = 2,
+            line_length = 2,
+            shift = util.by_pixel(0, 6),
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-corner-right.png",
+              priority = "extra-high",
+              width = 64,
+              height = 128,
+              variation_count = 2,
+              line_length = 2,
+              shift = util.by_pixel(0, 7),
+              scale = 0.5
+            }
           },
           {
-            filename = "__AlienWall__/graphics/entity/wall/wall-corner-right-down-shadow.png",
+            filename = "__AlienWall__/graphics/entity/wall/wall-corner-right-shadow.png",
             priority = "extra-high",
-            width = 53,
-            height = 61,
-            shift = {0.484375, 0.640625},
-            draw_as_shadow = true
+            width = 62,
+            height = 60,
+            repeat_count = 2,
+            shift = util.by_pixel(14, 28),
+            draw_as_shadow = true,
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-corner-right-shadow.png",
+              priority = "extra-high",
+              width = 124,
+              height = 120,
+              repeat_count = 2,
+              shift = util.by_pixel(17, 28),
+              draw_as_shadow = true,
+              scale = 0.5
+            }
           }
         }
       },
@@ -338,19 +359,44 @@ local hybridWall = {
         layers =
         {
           {
-            filename = "__AlienWall__/graphics/entity/wall/wall-corner-left-down.png",
+            filename = "__AlienWall__/graphics/entity/wall/wall-corner-left.png",
             priority = "extra-high",
-            width = 27,
-            height = 42,
-            shift = {-0.078125, -0.15625}
+            width = 32,
+            height = 68,
+            variation_count = 2,
+            line_length = 2,
+            shift = util.by_pixel(0, 6),
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-corner-left.png",
+              priority = "extra-high",
+              width = 64,
+              height = 134,
+              variation_count = 2,
+              line_length = 2,
+              shift = util.by_pixel(0, 7),
+              scale = 0.5
+            }
           },
           {
-            filename = "__AlienWall__/graphics/entity/wall/wall-corner-left-down-shadow.png",
+            filename = "__AlienWall__/graphics/entity/wall/wall-corner-left-shadow.png",
             priority = "extra-high",
-            width = 53,
+            width = 54,
             height = 60,
-            shift = {0.328125, 0.640625},
-            draw_as_shadow = true
+            repeat_count = 2,
+            shift = util.by_pixel(8, 28),
+            draw_as_shadow = true,
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-corner-left-shadow.png",
+              priority = "extra-high",
+              width = 102,
+              height = 120,
+              repeat_count = 2,
+              shift = util.by_pixel(9, 28),
+              draw_as_shadow = true,
+              scale = 0.5
+            }
           }
         }
       },
@@ -359,19 +405,44 @@ local hybridWall = {
         layers =
         {
           {
-            filename = "__AlienWall__/graphics/entity/wall/wall-t-down.png",
+            filename = "__AlienWall__/graphics/entity/wall/wall-t.png",
             priority = "extra-high",
             width = 32,
-            height = 42,
-            shift = {0, -0.15625}
+            height = 68,
+            variation_count = 4,
+            line_length = 4,
+            shift = util.by_pixel(0, 6),
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-t.png",
+              priority = "extra-high",
+              width = 64,
+              height = 134,
+              variation_count = 4,
+              line_length = 4,
+              shift = util.by_pixel(0, 7),
+              scale = 0.5
+            }
           },
           {
-            filename = "__AlienWall__/graphics/entity/wall/wall-t-down-shadow.png",
+            filename = "__AlienWall__/graphics/entity/wall/wall-t-shadow.png",
             priority = "extra-high",
-            width = 71,
-            height = 61,
-            shift = {0.546875, 0.640625},
-            draw_as_shadow = true
+            width = 62,
+            height = 60,
+            repeat_count = 4,
+            shift = util.by_pixel(14, 28),
+            draw_as_shadow = true,
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-t-shadow.png",
+              priority = "extra-high",
+              width = 124,
+              height = 120,
+              repeat_count = 4,
+              shift = util.by_pixel(14, 28),
+              draw_as_shadow = true,
+              scale = 0.5
+            }
           }
         }
       },
@@ -382,17 +453,42 @@ local hybridWall = {
           {
             filename = "__AlienWall__/graphics/entity/wall/wall-ending-right.png",
             priority = "extra-high",
-            width = 27,
-            height = 42,
-            shift = {0.078125, -0.15625}
+            width = 32,
+            height = 48,
+            variation_count = 2,
+            line_length = 2,
+            shift = util.by_pixel(0, -4),
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-ending-right.png",
+              priority = "extra-high",
+              width = 64,
+              height = 92,
+              variation_count = 2,
+              line_length = 2,
+              shift = util.by_pixel(0, -3),
+              scale = 0.5
+            }
           },
           {
             filename = "__AlienWall__/graphics/entity/wall/wall-ending-right-shadow.png",
             priority = "extra-high",
-            width = 53,
-            height = 32,
-            shift = {0.484375, 0.5},
-            draw_as_shadow = true
+            width = 62,
+            height = 36,
+            repeat_count = 2,
+            shift = util.by_pixel(14, 14),
+            draw_as_shadow = true,
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-ending-right-shadow.png",
+              priority = "extra-high",
+              width = 124,
+              height = 68,
+              repeat_count = 2,
+              shift = util.by_pixel(17, 15),
+              draw_as_shadow = true,
+              scale = 0.5
+            }
           }
         }
       },
@@ -403,18 +499,64 @@ local hybridWall = {
           {
             filename = "__AlienWall__/graphics/entity/wall/wall-ending-left.png",
             priority = "extra-high",
-            width = 27,
-            height = 42,
-            shift = {-0.078125, -0.15625}
+            width = 32,
+            height = 48,
+            variation_count = 2,
+            line_length = 2,
+            shift = util.by_pixel(0, -4),
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-ending-left.png",
+              priority = "extra-high",
+              width = 64,
+              height = 92,
+              variation_count = 2,
+              line_length = 2,
+              shift = util.by_pixel(0, -3),
+              scale = 0.5
+            }
           },
           {
             filename = "__AlienWall__/graphics/entity/wall/wall-ending-left-shadow.png",
             priority = "extra-high",
-            width = 53,
-            height = 32,
-            shift = {0.328125, 0.5},
-            draw_as_shadow = true
+            width = 54,
+            height = 36,
+            repeat_count = 2,
+            shift = util.by_pixel(8, 14),
+            draw_as_shadow = true,
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-ending-left-shadow.png",
+              priority = "extra-high",
+              width = 102,
+              height = 68,
+              repeat_count = 2,
+              shift = util.by_pixel(9, 15),
+              draw_as_shadow = true,
+              scale = 0.5
+            }
           }
+        }
+      },
+      filling =
+      {
+        filename = "__AlienWall__/graphics/entity/wall/wall-filling.png",
+        priority = "extra-high",
+        width = 24,
+        height = 30,
+        variation_count = 8,
+        line_length = 8,
+        shift = util.by_pixel(0, -2),
+        hr_version =
+        {
+          filename = "__AlienWall__/graphics/entity/wall/hr-wall-filling.png",
+          priority = "extra-high",
+          width = 48,
+          height = 56,
+          variation_count = 8,
+          line_length = 8,
+          shift = util.by_pixel(0, -1),
+          scale = 0.5
         }
       },
       water_connection_patch =
@@ -422,19 +564,38 @@ local hybridWall = {
         sheets =
         {
           {
-            filename = "__base__/graphics/entity/wall/wall-patch.png",
+            filename = "__AlienWall__/graphics/entity/wall/wall-patch.png",
             priority = "extra-high",
             width = 58,
             height = 64,
             shift = util.by_pixel(0, -2),
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-patch.png",
+              priority = "extra-high",
+              width = 116,
+              height = 128,
+              shift = util.by_pixel(0, -2),
+              scale = 0.5
+            }
           },
           {
-            filename = "__base__/graphics/entity/wall/wall-patch-shadow.png",
+            filename = "__AlienWall__/graphics/entity/wall/wall-patch-shadow.png",
             priority = "extra-high",
-            draw_as_shadow = true,
             width = 74,
             height = 52,
             shift = util.by_pixel(8, 14),
+            draw_as_shadow = true,
+            hr_version =
+            {
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-patch-shadow.png",
+              priority = "extra-high",
+              width = 144,
+              height = 100,
+              shift = util.by_pixel(9, 15),
+              draw_as_shadow = true,
+              scale = 0.5
+            }
           }
         }
       },
@@ -443,14 +604,14 @@ local hybridWall = {
         sheets =
         {
           {
-            filename = "__base__/graphics/entity/wall/wall-gate.png",
+            filename = "__AlienWall__/graphics/entity/wall/wall-gate.png",
             priority = "extra-high",
             width = 42,
             height = 56,
             shift = util.by_pixel(0, -8),
             hr_version =
             {
-              filename = "__base__/graphics/entity/wall/hr-wall-gate.png",
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-gate.png",
               priority = "extra-high",
               width = 82,
               height = 108,
@@ -459,7 +620,7 @@ local hybridWall = {
             }
           },
           {
-            filename = "__base__/graphics/entity/wall/wall-gate-shadow.png",
+            filename = "__AlienWall__/graphics/entity/wall/wall-gate-shadow.png",
             priority = "extra-high",
             width = 66,
             height = 40,
@@ -467,7 +628,7 @@ local hybridWall = {
             draw_as_shadow = true,
             hr_version =
             {
-              filename = "__base__/graphics/entity/wall/hr-wall-gate-shadow.png",
+              filename = "__AlienWall__/graphics/entity/wall/hr-wall-gate-shadow.png",
               priority = "extra-high",
               width = 130,
               height = 78,
@@ -484,8 +645,8 @@ local hybridWall = {
 local hybridCorpse = {
     type = "corpse",
     name = "hybrid-wall-remnants",
-    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall-remnants.png",
-    icon_size = 32,
+    icon = "__AlienWall__/graphics/icons/hybrid-wall-remnants.png",
+    icon_size = 64, icon_mipmaps = 4,
     flags = {"placeable-neutral", "player-creation"},
     order = "sw-r",
     selection_box = {{-0.5, -0.5}, {0.5, 0.5}},
@@ -497,11 +658,11 @@ local hybridCorpse = {
 local hybridGate = {
     type = "gate",
     name = "hybridGate",
-    icon = "__AlienWall__/graphics/icons/gate/hybrid-gate.png",
-    icon_size = 32,
+    icon = "__AlienWall__/graphics/icons/hybrid-gate.png",
+    icon_size = 64, icon_mipmaps = 4,
     flags = {"placeable-neutral","placeable-player", "player-creation", "not-repairable"},
     fast_replaceable_group = "wall",
-    minable = {hardness = 0.2, mining_time = 0.5, result = "hybridized-gate"},
+    minable = {mining_time = 0.5, result = "hybridized-gate"},
     max_health = HybridHP[1],
 	placeable_by = {item="hybridized-gate", count=1},
     corpse = "small-remnants",
@@ -510,6 +671,7 @@ local hybridGate = {
     opening_speed = 0.0666666,
     activation_distance = 3,
     timeout_to_close = 5,
+	fadeout_interval = 15,
     resistances =
     {
       {
@@ -529,6 +691,10 @@ local hybridGate = {
       },
       {
         type = "fire",
+        percent = 75
+      },
+	  {
+        type = "acid",
         percent = 75
       },
       {
@@ -843,7 +1009,7 @@ local hybridGate = {
       layers =
       {
         {
-          filename = "__base__/graphics/entity/gate/gate-wall-patch.png",
+          filename = "__AlienWall__/graphics/entity/gate/gate-wall-patch.png",
           line_length = 8,
           width = 34,
           height = 48,
@@ -851,7 +1017,7 @@ local hybridGate = {
           shift = util.by_pixel(0, 12),
           hr_version =
           {
-            filename = "__base__/graphics/entity/gate/hr-gate-wall-patch.png",
+            filename = "__AlienWall__/graphics/entity/gate/hr-gate-wall-patch.png",
             line_length = 8,
             width = 70,
             height = 94,
@@ -861,7 +1027,7 @@ local hybridGate = {
           }
         },
         {
-          filename = "__base__/graphics/entity/gate/gate-wall-patch-shadow.png",
+          filename = "__AlienWall__/graphics/entity/gate/gate-wall-patch-shadow.png",
           line_length = 8,
           width = 44,
           height = 38,
@@ -870,7 +1036,7 @@ local hybridGate = {
           draw_as_shadow = true,
           hr_version =
           {
-            filename = "__base__/graphics/entity/gate/hr-gate-wall-patch-shadow.png",
+            filename = "__AlienWall__/graphics/entity/gate/hr-gate-wall-patch-shadow.png",
             line_length = 8,
             width = 82,
             height = 72,
@@ -882,55 +1048,58 @@ local hybridGate = {
         }
       }
     },
-    
-    open_sound =
-    {
-      variations = 
-	  {
-	    filename = "__base__/sound/gate-open-1.ogg", volume = 0.55
-	  },
-	  {
-        filename = "__base__/sound/gate-open-2.ogg", volume = 0.55
-	  },
-	  {
-	    filename = "__base__/sound/gate-open-3.ogg", volume = 0.55
-	  },
-      {
-        filename = "__base__/sound/gate-open-4.ogg", volume = 0.55
-      },
-      {
-        filename = "__base__/sound/gate-open-5.ogg", volume = 0.55
-      },
-      aggregation =
-      {
-        max_count = 1,
-        remove = true
-      }
-    },
-    close_sound =
-    {
-      variations = 
-	  {
-	    filename = "__base__/sound/gate-close-1.ogg", volume = 0.55
-	  },
-	  {
-        filename = "__base__/sound/gate-close-2.ogg", volume = 0.55
-	  },
-	  {
-	    filename = "__base__/sound/gate-close-3.ogg", volume = 0.55
-	  },
-      {
-        filename = "__base__/sound/gate-close-4.ogg", volume = 0.55
-      },
-      {
-        filename = "__base__/sound/gate-close-5.ogg", volume = 0.55
-      },
-      aggregation =
-      {
-        max_count = 1,
-        remove = true
-      }
-    }
+	
+	vehicle_impact_sound = {
+		{
+			filename = "__base__/sound/car-metal-impact-2.ogg", volume = 0.5
+		},
+		{
+			filename = "__base__/sound/car-metal-impact-3.ogg", volume = 0.5
+		},
+		{
+			filename = "__base__/sound/car-metal-impact-4.ogg", volume = 0.5
+		},
+		{
+			filename = "__base__/sound/car-metal-impact-5.ogg", volume = 0.5
+		},
+		{
+			filename = "__base__/sound/car-metal-impact-6.ogg", volume = 0.5
+		}
+	},
+    open_sound = {
+		{
+			filename = "__base__/sound/gate-open-1.ogg", volume = 0.55
+		},
+		{
+			filename = "__base__/sound/gate-open-2.ogg", volume = 0.55
+		},
+		{
+			filename = "__base__/sound/gate-open-3.ogg", volume = 0.55
+		},
+		{
+			filename = "__base__/sound/gate-open-4.ogg", volume = 0.55
+		},
+		{
+			filename = "__base__/sound/gate-open-5.ogg", volume = 0.55
+		}
+	},
+    close_sound = {
+		{
+			filename = "__base__/sound/gate-close-1.ogg", volume = 0.55
+		},
+		{
+			filename = "__base__/sound/gate-close-2.ogg", volume = 0.55
+		},
+		{
+			filename = "__base__/sound/gate-close-3.ogg", volume = 0.55
+		},
+		{
+			filename = "__base__/sound/gate-close-4.ogg", volume = 0.55
+		},
+		{
+			filename = "__base__/sound/gate-close-5.ogg", volume = 0.55
+		}
+	}
 }
 
 data:extend({hybridWall, hybridCorpse, hybridGate})

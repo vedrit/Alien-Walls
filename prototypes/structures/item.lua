@@ -3,8 +3,8 @@ data:extend(
   {
     type = "item",
     name = "hybridized-wall",
-    icon = "__AlienWall__/graphics/icons/wall/hybrid-wall.png",
-	icon_size = 32,
+    icon = "__AlienWall__/graphics/icons/hybrid-wall.png",
+	icon_size = 64, icon_mipmaps = 4,
     subgroup = "structures",
     order = "a[hybridWall]",
     place_result = "hybridWall",
@@ -13,8 +13,8 @@ data:extend(
   {
     type = "item",
     name = "hybridized-gate",
-    icon = "__AlienWall__/graphics/icons/gate/hybrid-gate.png",
-	icon_size = 32,
+    icon = "__AlienWall__/graphics/icons/hybrid-gate.png",
+	icon_size = 64, icon_mipmaps = 4,
     subgroup = "structures",
     order = "b[hybridGate]",
     place_result = "hybridGate",
